@@ -15,6 +15,7 @@
 
 header {
     border-bottom: 1px solid var(--myMain);
+    padding: 1em 1em 1em;
 }
 
 header nav button {
