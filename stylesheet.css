@@ -22,3 +22,11 @@ header nav button {
     z-index: 86;
     display: inline-block;
 }
+
+header nav input {
+    border: 1px solid var(--myMain);
+    border-radius: 50px;
+    margin: 2px;
+    z-index: 86;
+    display: inline-block;
+}
