@@ -26,6 +26,12 @@ header nav button {
 	height: 40px;
     z-index: 86;
     display: inline-block;
+    outline: none;
+}
+
+header nav button:active, header nav button:focus, header nav select:active , header nav select:focus {
+    border-color: black;
+    box-shadow: 0 0 3px black;
 }
 
 header nav select {
@@ -34,6 +40,6 @@ header nav select {
     width: 10em;
     margin: 2px;
     z-index: 86;
-    
+    outline: none;
     display: inline-block;
 }
