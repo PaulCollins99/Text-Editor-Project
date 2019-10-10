@@ -13,6 +13,10 @@
     text-align: center;
 }
 
+header {
+    border-bottom: 1px solid var(--myMain);
+}
+
 header nav button {
 	border: 1px solid var(--myMain);
     border-radius: 50%;
