@@ -23,9 +23,10 @@ header nav button {
     display: inline-block;
 }
 
-header nav input {
+header nav select {
     border: 1px solid var(--myMain);
     border-radius: 50px;
+    width: 10em;
     margin: 2px;
     z-index: 86;
     text-align: center;
