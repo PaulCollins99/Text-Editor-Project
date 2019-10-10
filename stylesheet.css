@@ -9,6 +9,13 @@
     padding: 0;
 }
 
+body {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: "tool tool"
+                         "navbar textblock";
+}
+
 #circle-container {
     text-align: center;
 }
@@ -16,9 +23,10 @@
 header {
     border-bottom: 1px solid var(--myMain);
     padding: 1em 1em 1em;
+    grid-area: tool;
 }
 
-header nav button {
+header section button {
 	border: 1px solid var(--myMain);
     border-radius: 50%;
     margin: 2px;
@@ -29,12 +37,12 @@ header nav button {
     outline: none;
 }
 
-header nav button:active, header nav button:focus, header nav select:active , header nav select:focus {
+header section button:active, header section button:focus, header section select:active , header section select:focus {
     border-color: black;
     box-shadow: 0 0 3px black;
 }
 
-header nav select {
+header section select {
     border: 1px solid var(--myMain);
     border-radius: 50px;
     width: 10em;
@@ -42,4 +50,14 @@ header nav select {
     z-index: 86;
     outline: none;
     display: inline-block;
+}
+
+#maintext {
+    grid-area: textblock;
+    border: 1px solid var(--myMain);
+}
+
+nav {
+    grid-area: navbar;
+    border: 1px solid var(--myMain);
 }
