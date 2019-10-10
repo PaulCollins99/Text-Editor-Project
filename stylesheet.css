@@ -52,7 +52,7 @@ header section select {
     display: inline-block;
 }
 
-#maintext {
+#mainText {
     grid-area: textblock;
     border: 1px solid var(--myMain);
 }
