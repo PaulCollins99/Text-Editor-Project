@@ -12,8 +12,12 @@
 body {
     display: grid;
     grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 8fr 0.5fr;
     grid-template-areas: "tool tool"
-                         "navbar textblock";
+                         "navbar textblock"
+                         "foot foot";
+
+    height: 100vh;
 }
 
 #circle-container {
@@ -54,10 +58,15 @@ header section select {
 
 #mainText {
     grid-area: textblock;
-    border: 1px solid var(--myMain);
+    border: 1px solid red;
 }
 
 nav {
     grid-area: navbar;
-    border: 1px solid var(--myMain);
+    border: 1px solid green;
+}
+
+footer {
+    grid-area: foot;
+    border: 1px solid pink;
 }
