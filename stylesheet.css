@@ -29,6 +29,6 @@ header nav select {
     width: 10em;
     margin: 2px;
     z-index: 86;
-    text-align: center;
+    
     display: inline-block;
 }
