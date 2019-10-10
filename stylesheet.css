@@ -13,7 +13,7 @@
     text-align: center;
 }
 
-header ul button {
+header nav button {
 	border: 1px solid var(--myMain);
     border-radius: 50%;
     margin: 2px;
