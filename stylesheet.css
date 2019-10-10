@@ -17,10 +17,3 @@ header ul button {
     z-index: 86;
     display: inline-block;
 }
-
-#left {
-    position: relative;
-    top: 50%;
-    transform: translateX(-56%);
-    margin: 2px;
-}
