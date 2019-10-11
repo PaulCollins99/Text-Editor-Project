@@ -1,8 +1,13 @@
 'use strict';
 let navCount = 0;
-function click () {
-    console.log("This is a test listener");
+function click (e) {
+    console.log("You just clicked on " + e.target.id);
     
+}
+
+function clickOnNavText (e) {
+    let element = document.getElementById(e.target.id);
+    element.style.marginBottom = "2em";
 }
 
 function addClick () {
@@ -35,6 +40,7 @@ function createTextInput (id, type) {
     textinput.id = id;
     textinput.placeholder = "Insert Text";
     navCount += 1;
+    textinput.addEventListener('click', clickOnNavText);
     return textinput;
 }
 
