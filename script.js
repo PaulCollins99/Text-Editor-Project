@@ -34,14 +34,7 @@ function addIndent() {
     element.value = "";
     stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
     console.log(stringArray);
-    //new line thing isnt working rightx
-    for (const x in stringArray) {
-        if (stringArray[x] == "\t") {
-            
-        } else {
-            element.value += stringArray[x] + "\n";
-        }
-    }
+    element.value = stringArray.join("\n");
     indentLog[lineNumber] = "test";
     console.log(indentLog[lineNumber]);
     return false;
