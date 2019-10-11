@@ -11,21 +11,34 @@
 </head>
 
 <body>
-    <header>
-        <section id="toolbar">
+    <section id="toolbar">
+        <div id="topSide">
             <button id="left" type="button">←</button>
             <button id="right" type="button">→</button>
-            <select id="myList">
-                <option value="1">level one</option>
-                <option value="2">level two</option>
-                <option value="3">level three</option>
-                <option value="4">level four</option>
-                <option value="10">standard text</option>
-            </select>
+        </div>
+        <select id="myList">
+            <option value="1">level one</option>
+            <option value="2">level two</option>
+            <option value="3">level three</option>
+            <option value="4">level four</option>
+            <option value="10">standard text</option>
+        </select>
+        <div id="bottomSide">
             <button id="up" type="button">↑</button>
             <button id="down" type="button">↓</button>
-            </nav>
-    </header>
+        </div>
+    </section>
+    <section id="centerText">
+        <p>
+            Center
+        </p>
+    </section>
+    <section id="rightHandTools">
+        <P>
+            Right
+        </P>
+    </section>
+
     <main id="mainText">
         <textarea id="text"></textarea>
     </main>

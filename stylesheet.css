@@ -11,11 +11,11 @@
 
 body {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 5fr 1fr;
     grid-template-rows: 1fr 8fr 0.5fr;
-    grid-template-areas: "tool text tool2"
-                         "navbar textblock"
-                         "foot foot";
+    grid-template-areas: "tool centerText tool2"
+                         "navbar textblock textblock"
+                         "foot foot foot";
 
     height: 100vh;
 }
@@ -27,7 +27,7 @@ body {
 header {
     border-bottom: 1px solid var(--myMain);
     padding: 1em 1em 1em;
-    grid-area: tool;
+    
 }
 
 button {
@@ -56,6 +56,30 @@ select {
     display: inline-block;
 }
 
+#toolbar {
+    grid-area: tool;
+    border-bottom: 1px solid var(--myMain);
+    padding: 1em 1em 1em;
+    
+}
+
+#topSide, #bottomSide {
+    padding-left: 20px;
+}
+
+#centerText {
+    grid-area: centerText;
+    border-bottom: 1px solid var(--myMain);
+    padding: 1em 1em 1em;
+    
+}
+
+#rightHandTools {
+    grid-area: tool2;
+    border-bottom: 1px solid var(--myMain);
+    padding: 1em 1em 1em;
+}
+
 #mainText {
     grid-area: textblock;
     border: 1px solid red;
@@ -74,6 +98,10 @@ nav {
     text-align: center;
 }
 
+nav input {
+    margin-bottom: 0.5em;
+}
+
 footer {
     grid-area: foot;
     border: 1px solid pink;
@@ -81,7 +109,7 @@ footer {
 
 @media (max-width:1800px) {
     body {
-        grid-template-columns: 1fr 7fr;
+        grid-template-columns: 1fr 7fr 1fr;
         grid-template-rows: 1fr 8fr 0.5fr;  
     }
 
@@ -90,7 +118,7 @@ footer {
 
 @media (max-width:1200px) {
     body {
-        grid-template-columns: 1fr 6fr;
+        grid-template-columns: 1fr 6fr 1fr;
         grid-template-rows: 1fr 8fr 0.5fr;  
     }
 
@@ -99,7 +127,7 @@ footer {
 
 @media (max-width:800px) {
     body {
-        grid-template-columns: 1fr 5fr;
+        grid-template-columns: 1fr 5fr 1fr;
         grid-template-rows: 1fr 8fr 0.5fr;  
     }
 
@@ -108,7 +136,7 @@ footer {
 
 @media (max-width:400px) {
     body {
-        grid-template-columns: 1fr 4fr;
+        grid-template-columns: 1fr 4fr 1fr;
         grid-template-rows: 1fr 8fr 0.5fr;  
     }
 
