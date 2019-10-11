@@ -6,10 +6,14 @@ function click () {
 }
 
 function createButton () {
-
+    let oldButton = document.getElementById("mainAdd");
     let newButton = document.createElement('button');
     newButton.type = "button";
-    newButton.textContent = "+"
+    newButton.textContent = "+";
+    newButton.id = "mainAdd";
+    oldButton.removeEventListener('click', createButton);
+    oldButton.id = "";
+    newButton.addEventListener('click', createButton);
     let location = document.getElementById('navigation')
     location.appendChild(newButton);
 }
