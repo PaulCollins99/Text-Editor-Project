@@ -10,6 +10,7 @@ function boot () {
     window.right.addEventListener('click', click)
     window.up.addEventListener('click', click)
     window.down.addEventListener('click', click)
+    window.mainAdd.addEventListener('click', click)
 }
 
 window.addEventListener('load', boot);
