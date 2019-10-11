@@ -2,12 +2,20 @@
 let navCount = 0;
 function click (e) {
     console.log("You just clicked on " + e.target.id);
+    let test = "";
+    test = e.target.id;
+    console.log(test = test.substring(3));
     
 }
 
 function clickOnNavText (e) {
     let element = document.getElementById(e.target.id);
     element.style.marginBottom = "2em";
+    let id = e.target.id;
+    id = "wrapper" + id.substring(3)
+    let wrapper = document.getElementById(id);
+    let smallButton = createButton("button", "+", "test");
+    wrapper.appendChild(smallButton);
 }
 
 function addClick () {
@@ -41,7 +49,15 @@ function createTextInput (id, type) {
     textinput.placeholder = "Insert Text";
     navCount += 1;
     textinput.addEventListener('click', clickOnNavText);
-    return textinput;
+    let wrapped = createWrapper();
+    wrapped.appendChild(textinput);
+    return wrapped;
+}
+
+function createWrapper () {
+    let wrapper = document.createElement('div');
+    wrapper.id = "wrapper" + navCount;
+    return wrapper;
 }
 
 function boot () {
