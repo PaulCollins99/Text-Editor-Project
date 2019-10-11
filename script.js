@@ -7,7 +7,7 @@ function click (e) {
     console.log(test = test.substring(3));
     
 }
-
+//global to store previously clicked on input id's and check against it whenever you click on a new one
 function clickOnNavText (e) {
     let element = document.getElementById(e.target.id);
     element.style.marginBottom = "2em";
