@@ -1,5 +1,6 @@
 'use strict';
 let navCount = 0;
+let loggedNavInput = "";
 function click (e) {
     console.log("You just clicked on " + e.target.id);
     let test = "";
@@ -11,6 +12,8 @@ function click (e) {
 function clickOnNavText (e) {
     let element = document.getElementById(e.target.id);
     element.style.marginBottom = "2em";
+    loggedNavInput = element.id;
+    
     let id = e.target.id;
     id = "wrapper" + id.substring(3)
     let wrapper = document.getElementById(id);
