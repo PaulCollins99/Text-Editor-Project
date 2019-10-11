@@ -1,5 +1,5 @@
 'use strict';
-
+let navCount = 0;
 function click () {
     console.log("This is a test listener");
     
@@ -7,7 +7,7 @@ function click () {
 
 function addClick () {
     let newButton = createButton("button", "+", "mainAdd");
-    let newTextInput = createTextInput("Test", "text");
+    let newTextInput = createTextInput("nav" + navCount, "text");
     removeElement("mainAdd");
     newButton.addEventListener('click', addClick);
     let location = document.getElementById('navigation')
@@ -34,6 +34,7 @@ function createTextInput (id, type) {
     textinput.type = type;
     textinput.id = id;
     textinput.placeholder = "Insert Text";
+    navCount += 1;
     return textinput;
 }
 
