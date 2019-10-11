@@ -7,9 +7,6 @@ function click (e) {
 function convertToArray (e) {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     console.log(stringArray);
-
-    
-    
 }
 
 function boot () {
