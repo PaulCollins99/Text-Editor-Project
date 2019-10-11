@@ -30,7 +30,7 @@ header {
     grid-area: tool;
 }
 
-header section button {
+button {
 	border: 1px solid var(--myMain);
     border-radius: 50%;
     margin: 2px;
@@ -41,12 +41,12 @@ header section button {
     outline: none;
 }
 
-header section button:active, header section button:focus, header section select:active , header section select:focus {
+button:active, button:focus, select:active , select:focus {
     border-color: black;
     box-shadow: 0 0 3px black;
 }
 
-header section select {
+select {
     border: 1px solid var(--myMain);
     border-radius: 50px;
     width: 10em;
@@ -59,10 +59,9 @@ header section select {
 #mainText {
     grid-area: textblock;
     border: 1px solid red;
+    
 }
 
-#mainText textarea {
-}
 
 nav {
     grid-area: navbar;
