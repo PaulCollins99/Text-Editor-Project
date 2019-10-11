@@ -8,7 +8,7 @@ function click () {
 function addClick () {
     let newButton = createButton("button", "+", "mainAdd");
     let newTextInput = createTextInput("Test", "text");
-    removeAddButton("mainAdd");
+    removeElement("mainAdd");
     newButton.addEventListener('click', addClick);
     let location = document.getElementById('navigation')
     location.appendChild(newTextInput);
@@ -23,9 +23,9 @@ function createButton (type, text, id) {
     return button;
 }
 
-function removeAddButton (id) {
-    let button = document.getElementById(id);
-    button.remove()
+function removeElement (id) {
+    let element = document.getElementById(id);
+    element.remove();
 
 }
 

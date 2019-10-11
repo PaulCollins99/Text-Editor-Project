@@ -13,7 +13,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr 8fr 0.5fr;
-    grid-template-areas: "tool tool"
+    grid-template-areas: "tool text tool2"
                          "navbar textblock"
                          "foot foot";
 
