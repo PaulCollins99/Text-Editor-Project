@@ -78,3 +78,38 @@ footer {
     grid-area: foot;
     border: 1px solid pink;
 }
+
+@media (max-width:1800px) {
+    body {
+        grid-template-columns: 1fr 7fr;
+        grid-template-rows: 1fr 8fr 0.5fr;  
+    }
+
+}
+
+
+@media (max-width:1200px) {
+    body {
+        grid-template-columns: 1fr 6fr;
+        grid-template-rows: 1fr 8fr 0.5fr;  
+    }
+
+}
+
+
+@media (max-width:800px) {
+    body {
+        grid-template-columns: 1fr 5fr;
+        grid-template-rows: 1fr 8fr 0.5fr;  
+    }
+
+}
+
+
+@media (max-width:400px) {
+    body {
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: 1fr 8fr 0.5fr;  
+    }
+
+}
