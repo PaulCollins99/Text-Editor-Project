@@ -6,11 +6,12 @@ function click () {
 }
 
 function addClick () {
-    let newButton = createButton("button", "awadwadwa", "mainAdd");
-    let newTextInput = document.createElement('textinput');
+    let newButton = createButton("button", "+", "mainAdd");
+    let newTextInput = createTextInput("Test", "text");
     removeAddButton("mainAdd");
     newButton.addEventListener('click', addClick);
     let location = document.getElementById('navigation')
+    location.appendChild(newTextInput);
     location.appendChild(newButton);
 }
 
@@ -28,8 +29,12 @@ function removeAddButton (id) {
 
 }
 
-function createTextInput () {
-
+function createTextInput (id, type) {
+    let textinput = document.createElement('input');
+    textinput.type = type;
+    textinput.id = id;
+    textinput.placeholder = "Insert Text";
+    return textinput;
 }
 
 function boot () {
