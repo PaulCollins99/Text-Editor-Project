@@ -35,9 +35,16 @@ function addIndent() {
     stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
     console.log(stringArray);
     element.value = stringArray.join("\n");
-    indentLog[lineNumber] = "test";
+    if (typeof indentLog[lineNumber] === "undefined") {
+        indentLog[lineNumber] = 1;
+        console.log("here");
+        
+    } else {
+        indentLog[lineNumber] += 1;
+        console.log("in else");
+        
+    }
     console.log(indentLog[lineNumber]);
-    return false;
 }
 
 function enableTab(id) {
