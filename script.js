@@ -1,43 +1,64 @@
 'use strict';
-function click (e) {
+
+let indentLog = []
+
+function click(e) {
     console.log(e.target.id);
-    
+
 }
 
-function convertToArray (e) {
+function convertToArray(e) {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     console.log(getLineNumber());
-    
+
     return stringArray;
 }
 
-function getLineNumber () {
-    return window.mainTextArea.value.substring(0,window.mainTextArea.selectionStart).split("\n").length;
+function getLineNumber() {
+    return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split("\n").length;
 }
 
-function keydownHandler (e) {
-   
+function keydownHandler(e) {
+
     if (e.code == "Tab") {
         addIndent();
     }
-    
+
 }
 
-function addIndent () {
+function addIndent() {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
 
     element.value = "";
-    stringArray[lineNumber - 1] = "   " + stringArray[lineNumber - 1];
+    stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
+    console.log(stringArray);
+    //new line thing isnt working rightx
     for (const x in stringArray) {
-        element.value += stringArray[x];
+        if (stringArray[x] == "\t") {
+            
+        } else {
+            element.value += stringArray[x] + "\n";
+        }
     }
+    indentLog[lineNumber] = "test";
+    console.log(indentLog[lineNumber]);
+    return false;
+}
+
+function enableTab(id) {
+    var el = document.getElementById(id);
+    el.onkeydown = function (e) {
+        if (e.keyCode === 9) {
+            return false;
+        }
+    };
 }
 
 
 
-function boot () {
+function boot() {
     window.left.addEventListener('click', click);
     window.right.addEventListener('click', click);
     window.up.addEventListener('click', click);
@@ -45,6 +66,7 @@ function boot () {
     window.mainAdd.addEventListener('click', click);
     window.testButton.addEventListener('click', convertToArray);
     window.mainTextArea.addEventListener('keydown', keydownHandler)
+    enableTab("mainTextArea");
 }
 
 window.addEventListener('load', boot);
