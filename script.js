@@ -5,26 +5,39 @@ function click () {
     
 }
 
-function createButton () {
-    let oldButton = document.getElementById("mainAdd");
-    let newButton = document.createElement('button');
-    newButton.type = "button";
-    newButton.textContent = "+";
-    newButton.id = "mainAdd";
-    oldButton.removeEventListener('click', createButton);
-    oldButton.id = "";
-    newButton.addEventListener('click', createButton);
+function addClick () {
+    let newButton = createButton("button", "awadwadwa", "mainAdd");
+    let newTextInput = document.createElement('textinput');
+    removeAddButton("mainAdd");
+    newButton.addEventListener('click', addClick);
     let location = document.getElementById('navigation')
     location.appendChild(newButton);
 }
 
+function createButton (type, text, id) {
+    let button = document.createElement('button');
+    button.type = type;
+    button.textContent = text;
+    button.id = id;
+    return button;
+}
+
+function removeAddButton (id) {
+    let button = document.getElementById(id);
+    button.remove()
+
+}
+
+function createTextInput () {
+
+}
 
 function boot () {
     window.left.addEventListener('click', click);
     window.right.addEventListener('click', click);
     window.up.addEventListener('click', click);
     window.down.addEventListener('click', click);
-    window.mainAdd.addEventListener('click', createButton);
+    window.mainAdd.addEventListener('click', addClick);
 }
 
 window.addEventListener('load', boot);
