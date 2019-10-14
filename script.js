@@ -48,8 +48,8 @@ function addIndent() {
 }
 
 function enableTab(id) {
-    var el = document.getElementById(id);
-    el.onkeydown = function (e) {
+    let element = document.getElementById(id);
+    element.onkeydown = function (e) {
         if (e.keyCode === 9) {
             return false;
         }
