@@ -9,8 +9,6 @@ function click(e) {
 
 function convertToArray(e) {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
-    console.log(getLineNumber());
-
     return stringArray;
 }
 
@@ -23,6 +21,18 @@ function keydownHandler(e) {
     if (e.code == "Tab") {
         addIndent();
     }
+    if (e.code == "Enter") {
+
+    }
+
+}
+
+function newLine () {
+    let element = document.getElementById("mainTextArea");
+    let stringArray = convertToArray(element);
+    let lineNumber = getLineNumber();
+    stringArray[lineNumber] += "‣";
+    element.value = stringArray.join("\n");
 
 }
 
@@ -36,15 +46,10 @@ function addIndent() {
     console.log(stringArray);
     element.value = stringArray.join("\n");
     if (typeof indentLog[lineNumber] === "undefined") {
-        indentLog[lineNumber] = 1;
-        console.log("here");
-        
+        indentLog[lineNumber] = 1;        
     } else {
-        indentLog[lineNumber] += 1;
-        console.log("in else");
-        
+        indentLog[lineNumber] += 1;        
     }
-    console.log(indentLog[lineNumber]);
 }
 
 function enableTab(id) {
