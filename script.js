@@ -7,7 +7,7 @@ function click(e) {
 
 }
 
-function convertToArray(e) {
+function convertToArray() {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     return stringArray;
 }
@@ -22,12 +22,11 @@ function keydownHandler(e) {
         addIndent();
     }
     if (e.code == "Enter") {
-
+        addBullet()
     }
-
 }
 
-function newLine () {
+function addBullet () {
     let element = document.getElementById("mainTextArea");
     let stringArray = convertToArray(element);
     let lineNumber = getLineNumber();
