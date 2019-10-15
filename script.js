@@ -7,7 +7,7 @@ function click(e) {
 
 }
 
-function convertToArray() {
+function convertToArray (e) {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     return stringArray;
 }
@@ -30,7 +30,7 @@ function addBullet () {
     let element = document.getElementById("mainTextArea");
     let stringArray = convertToArray(element);
     let lineNumber = getLineNumber();
-    stringArray[lineNumber] += "‣";
+    stringArray[lineNumber + 1] = "›";
     element.value = stringArray.join("\n");
 
 }
@@ -42,7 +42,6 @@ function addIndent() {
 
     element.value = "";
     stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
-    console.log(stringArray);
     element.value = stringArray.join("\n");
     if (typeof indentLog[lineNumber] === "undefined") {
         indentLog[lineNumber] = 1;        
