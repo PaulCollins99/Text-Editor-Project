@@ -30,7 +30,7 @@ function addBullet () {
     let element = document.getElementById("mainTextArea");
     let stringArray = convertToArray(element);
     let lineNumber = getLineNumber();
-    stringArray[lineNumber + 1] = "›";
+    stringArray[lineNumber] = "›";
     element.value = stringArray.join("\n");
 
 }
