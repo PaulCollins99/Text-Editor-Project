@@ -22,7 +22,7 @@ function keydownHandler(e) {
         addIndent();
     }
     if (e.code == "Enter") {
-        addBullet()
+        addBullet();
     }
 }
 
