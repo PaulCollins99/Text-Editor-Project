@@ -22,16 +22,17 @@ function keydownHandler(e) {
         addIndent();
     }
     if (e.code == "Enter") {
-        addBullet();
+       //add bullet points in here addBullet();
+    }
+    if (e.code == "Shift" && e.code == "Tab") {
+        console.log("Shift Tab");
+        
     }
 }
 
 function addBullet () {
     let element = document.getElementById("mainTextArea");
-    let stringArray = convertToArray(element);
-    let lineNumber = getLineNumber();
-    stringArray[lineNumber] = "‣";
-    element.value = stringArray.join("\n");
+    element.value += "o";
 
 }
 
