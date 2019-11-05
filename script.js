@@ -17,17 +17,30 @@ function getLineNumber() {
 }
 
 function keydownHandler(e) {
-
-    if (e.code == "Tab") {
+    
+    if (e.shiftKey && e.key == "Tab") {
+        outDent();
+    }
+    else if (!e.shiftKey && e.key === "Tab") {
         addIndent();
     }
-    if (e.code == "Enter") {
+    if (e.key == "Enter") {
        //add bullet points in here addBullet();
     }
-    if (e.code == "Shift" && e.code == "Tab") {
-        console.log("Shift Tab");
-        
+}
+
+function outDent () {
+    let element = document.getElementById("mainTextArea");
+    let lineNumber = getLineNumber();
+    let stringArray = convertToArray(element);
+
+    element.value = "";
+    if (stringArray[lineNumber - 1].substring(0,1) == "\t") {
+        stringArray[lineNumber - 1] = stringArray[lineNumber - 1].substring(1);
+        indentLog[lineNumber] -= 1;
     }
+    element.value = stringArray.join("\n");
+
 }
 
 function addBullet () {
