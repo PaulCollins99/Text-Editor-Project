@@ -16,6 +16,16 @@ function getLineNumber() {
     return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split("\n").length;
 }
 
+function setSave () {
+    let element = document.getElementById("mainTextArea");
+    localStorage.setItem("savedText", element.value);
+}
+
+function getSave () {
+    let element = document.getElementById("mainTextArea");
+    element.value = localStorage.getItem("savedText")
+}
+
 function keydownHandler(e) {
     
     if (e.shiftKey && e.key == "Tab") {
@@ -27,6 +37,42 @@ function keydownHandler(e) {
     if (e.key == "Enter") {
        //add bullet points in here addBullet();
     }
+    if (e.ctrlKey && e.key == "ArrowUp") {
+        moveLineUp();
+    } else if (e.ctrlKey && e.key == "ArrowDown") {
+        moveLineDown();
+    }
+}
+
+function moveLineUp () {
+    let element = document.getElementById("mainTextArea");
+    let lineNumber = getLineNumber();
+    let stringArray = convertToArray(element);
+    let temp = stringArray[lineNumber - 1];
+
+    if (lineNumber - 1 != 0) {
+        stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
+        stringArray[lineNumber - 2] = temp
+    }
+
+    element.value = "";
+    element.value = stringArray.join("\n");
+
+}
+
+
+function moveLineDown () {
+    let element = document.getElementById("mainTextArea");
+    let lineNumber = getLineNumber();
+    let stringArray = convertToArray(element);
+
+    let temp = stringArray[lineNumber - 1];
+
+    stringArray[lineNumber - 1] = stringArray[lineNumber];
+    stringArray[lineNumber] = temp
+    element.value = "";
+    element.value = stringArray.join("\n");
+
 }
 
 function outDent () {
