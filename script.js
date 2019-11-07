@@ -110,7 +110,7 @@ function addIndent() {
     }
 }
 
-function enableTab(id) {
+function disableTab(id) {
     let element = document.getElementById(id);
     element.onkeydown = function (e) {
         if (e.keyCode === 9) {
@@ -129,7 +129,7 @@ function boot() {
     window.mainAdd.addEventListener('click', click);
     window.testButton.addEventListener('click', convertToArray);
     window.mainTextArea.addEventListener('keydown', keydownHandler)
-    enableTab("mainTextArea");
+    disableTab("mainTextArea");
 }
 
 window.addEventListener('load', boot);
