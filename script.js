@@ -128,8 +128,16 @@ function boot() {
     window.down.addEventListener('click', click);
     window.mainAdd.addEventListener('click', click);
     window.testButton.addEventListener('click', convertToArray);
-    window.mainTextArea.addEventListener('keydown', keydownHandler)
+    window.mainTextArea.addEventListener('keydown', keydownHandler);
+    window.save.addEventListener('click', setSave);
+    window.load.addEventListener('click', getSave);
+    window.addEventListener('unload', setSave);
+    setInterval(setSave, 5000);
+    getSave();
     disableTab("mainTextArea");
 }
 
 window.addEventListener('load', boot);
+
+//get selection to save
+//selectionstart = saved data to set cursor location
