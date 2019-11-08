@@ -132,7 +132,7 @@ function boot() {
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
     window.addEventListener('unload', setSave);
-    setInterval(setSave, 5000);
+    setInterval(setSave, 120000);
     getSave();
     disableTab("mainTextArea");
 }
