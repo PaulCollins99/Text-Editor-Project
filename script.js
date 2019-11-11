@@ -72,7 +72,6 @@ function moveLineDown () {
     stringArray[lineNumber] = temp
     element.value = "";
     element.value = stringArray.join("\n");
-    element.focus;
     }
 
 function outDent () {
