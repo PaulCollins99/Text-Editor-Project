@@ -65,15 +65,15 @@ function moveLineDown () {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
-
+    let cursorPos = window.mainTextArea.selectionStart + 1;
     let temp = stringArray[lineNumber - 1];
 
     stringArray[lineNumber - 1] = stringArray[lineNumber];
     stringArray[lineNumber] = temp
     element.value = "";
     element.value = stringArray.join("\n");
-
-}
+    element.focus;
+    }
 
 function outDent () {
     let element = document.getElementById("mainTextArea");
