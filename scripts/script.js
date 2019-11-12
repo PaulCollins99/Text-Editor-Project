@@ -159,9 +159,3 @@ function boot() {
 }
 
 window.addEventListener('load', boot);
-//output saveFile names
-//for (var i = 0; i < localStorage.length; i++){
-//	if (localStorage.key(i).substring(0,9) == "saveFile:") {    
-//      console.log(localStorage.key(i).substring(9));
-//  }
-//}

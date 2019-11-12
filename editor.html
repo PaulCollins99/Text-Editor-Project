@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Text Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style/stylesheet.css" />
+    <script src="scripts/script.js"></script>
+</head>
+
+<body>
+    <section id="toolbar">
+        <div id="topSide">
+            <button id="left" type="button">←</button>
+            <button id="right" type="button">→</button>
+        </div>
+        <select id="myList">
+            <option value="1">level one</option>
+            <option value="2">level two</option>
+            <option value="3">level three</option>
+            <option value="4">level four</option>
+            <option value="10">standard text</option>
+        </select>
+        <div id="bottomSide">
+            <button id="up" type="button">↑</button>
+            <button id="down" type="button">↓</button>
+        </div>
+    </section>
+    <section id="centerText">
+        <button id="saveAsButton" type="button">Save As</button>
+        <input type="text" id="saveAsName">
+    </section>
+    <section id="rightHandTools">
+        <button id="save" type="button">Save</button>
+        <button id="load" type="button">Load</button>
+    </section>
+
+    <main id="mainText">
+        <textarea id="mainTextArea" placeholder="‣"></textarea>
+    </main>
+    <nav id="navigation">
+
+        <button type="button" id="mainAdd">+</button>
+    </nav>
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+</body>
+
+</html>
