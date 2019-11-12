@@ -15,8 +15,14 @@ function navigate () {
     localStorage.setItem("load", element.value);
 }
 
+function newFile () {
+    location.href = "editor.html";
+    localStorage.setItem("autoSave", "");
+}
+
 function boot() {
     window.openButton.addEventListener('click', navigate);
+    window.newFileButton.addEventListener('click', newFile)
     populateOptions();
 }
 
