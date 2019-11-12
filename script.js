@@ -48,6 +48,7 @@ function moveLineUp () {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart;
     let temp = stringArray[lineNumber - 1];
 
     if (lineNumber - 1 != 0) {
@@ -57,6 +58,9 @@ function moveLineUp () {
 
     element.value = "";
     element.value = stringArray.join("\n");
+    
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 
 }
 
@@ -64,20 +68,24 @@ function moveLineUp () {
 function moveLineDown () {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
-    let stringArray = convertToArray(element);
-    let cursorPos = window.mainTextArea.selectionStart + 1;
+    let stringArray = convertToArray(element);    
+    let cursorPos = element.selectionStart;
     let temp = stringArray[lineNumber - 1];
 
     stringArray[lineNumber - 1] = stringArray[lineNumber];
     stringArray[lineNumber] = temp
     element.value = "";
     element.value = stringArray.join("\n");
+    
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
     }
 
 function outDent () {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart;
 
     element.value = "";
     if (stringArray[lineNumber - 1].substring(0,1) == "\t") {
@@ -86,18 +94,15 @@ function outDent () {
     }
     element.value = stringArray.join("\n");
 
-}
-
-function addBullet () {
-    let element = document.getElementById("mainTextArea");
-    element.value += "o";
-
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 }
 
 function addIndent() {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart + 1;
 
     element.value = "";
     stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
@@ -107,7 +112,17 @@ function addIndent() {
     } else {
         indentLog[lineNumber] += 1;        
     }
+
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 }
+
+function addBullet () {
+    let element = document.getElementById("mainTextArea");
+    element.value += "o";
+
+}
+
 
 function disableTab(id) {
     let element = document.getElementById(id);
