@@ -29,7 +29,13 @@ function saveAs () {
 
 function getSave () {
     let element = document.getElementById("mainTextArea");
-    element.value = localStorage.getItem("autoSave")
+    let checkLoad = localStorage.getItem("load");
+    if (checkLoad == "none") {
+        element.value = localStorage.getItem("autoSave");
+    } else {
+        element.value = localStorage.getItem("saveFile:" + checkLoad);
+        localStorage.setItem("load", "none");
+    }
 }
 
 function keydownHandler(e) {

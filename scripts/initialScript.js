@@ -10,7 +10,9 @@ function populateOptions() {
 }
 
 function navigate () {
+    let element = document.getElementById("openSelect")
     location.href = "editor.html";
+    localStorage.setItem("load", element.value);
 }
 
 function boot() {
