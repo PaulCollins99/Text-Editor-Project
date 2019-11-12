@@ -18,12 +18,18 @@ function getLineNumber() {
 
 function setSave () {
     let element = document.getElementById("mainTextArea");
-    localStorage.setItem("savedText", element.value);
+    localStorage.setItem("autoSave", element.value);
+}
+
+function saveAs () {
+    let value = document.getElementById("mainTextArea").value;
+    let title = document.getElementById("saveAsName").value;
+    localStorage.setItem("saveFile:".concat(title), value);
 }
 
 function getSave () {
     let element = document.getElementById("mainTextArea");
-    element.value = localStorage.getItem("savedText")
+    element.value = localStorage.getItem("autoSave")
 }
 
 function keydownHandler(e) {
@@ -141,10 +147,11 @@ function boot() {
     window.up.addEventListener('click', click);
     window.down.addEventListener('click', click);
     window.mainAdd.addEventListener('click', click);
-    window.testButton.addEventListener('click', convertToArray);
+  //  window.testButton.addEventListener('click', convertToArray);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
+    window.saveAsButton.addEventListener('click', saveAs);
     window.addEventListener('unload', setSave);
     setInterval(setSave, 120000);
     getSave();
@@ -152,6 +159,9 @@ function boot() {
 }
 
 window.addEventListener('load', boot);
-
-//get selection to save
-//selectionstart = saved data to set cursor location
+//output saveFile names
+//for (var i = 0; i < localStorage.length; i++){
+//	if (localStorage.key(i).substring(0,9) == "saveFile:") {    
+//      console.log(localStorage.key(i).substring(9));
+//  }
+//}

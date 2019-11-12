@@ -71,7 +71,12 @@ select {
     grid-area: centerText;
     border-bottom: 1px solid var(--myMain);
     padding: 1em 1em 1em;
+    text-align: center;   
     
+}
+
+#saveAs {
+    width: 60px;
 }
 
 #rightHandTools {
