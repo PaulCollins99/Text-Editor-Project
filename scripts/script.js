@@ -145,8 +145,22 @@ function disableTab(id) {
     };
 }
 
+function populateOptions() {
+    for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).substring(0, 9) == "saveFile:") {
+            const option = document.createElement("option")
+            option.value = localStorage.key(i).substring(9);
+            option.textContent = localStorage.key(i).substring(9);
+            document.getElementById("openSelect").appendChild(option);
+        }
+    }
+}
 
-
+function openFile () {
+    const value = document.getElementById("openSelect").value;
+    localStorage.setItem("load", value);
+    getSave();
+}
 function boot() {
     window.left.addEventListener('click', click);
     window.right.addEventListener('click', click);
@@ -158,10 +172,12 @@ function boot() {
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
     window.saveAsButton.addEventListener('click', saveAs);
+    window.openButton.addEventListener('click', openFile);
     window.addEventListener('unload', setSave);
     setInterval(setSave, 120000);
     getSave();
     disableTab("mainTextArea");
+    populateOptions();
 }
 
 window.addEventListener('load', boot);
