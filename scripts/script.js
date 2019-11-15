@@ -1,5 +1,7 @@
 'use strict';
 
+//An array that is used to track the level of indentation
+
 let indentLog = []
 
 function click(e) {
@@ -7,25 +9,35 @@ function click(e) {
 
 }
 
+//converts the mainTextArea into an array splitting at each new line
+
 function convertToArray (e) {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     return stringArray;
 }
 
+//gets current line number for cursor
+
 function getLineNumber() {
     return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split("\n").length;
 }
+
+//autoSave function
 
 function setSave () {
     let element = document.getElementById("mainTextArea");
     localStorage.setItem("autoSave", element.value);
 }
 
+//create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
+
 function saveAs () {
     let value = document.getElementById("mainTextArea").value;
     let title = document.getElementById("saveAsName").value;
     localStorage.setItem("saveFile:".concat(title), value);
 }
+
+//Gets localStorage save states
 
 function getSave () {
     let element = document.getElementById("mainTextArea");
@@ -37,6 +49,8 @@ function getSave () {
         localStorage.setItem("load", "none");
     }
 }
+
+//Handles all keyboard inputs
 
 function keydownHandler(e) {
     
@@ -55,6 +69,8 @@ function keydownHandler(e) {
         moveLineDown();
     }
 }
+
+//Moves the line the cursor is on up
 
 function moveLineUp () {
     let element = document.getElementById("mainTextArea");
@@ -76,6 +92,7 @@ function moveLineUp () {
 
 }
 
+//Moves the line the cursor is on down
 
 function moveLineDown () {
     let element = document.getElementById("mainTextArea");
@@ -93,6 +110,8 @@ function moveLineDown () {
     element.setSelectionRange(cursorPos, cursorPos);
     }
 
+//Removes one tab indent on the current line
+
 function outDent () {
     let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
@@ -109,6 +128,8 @@ function outDent () {
     element.focus();
     element.setSelectionRange(cursorPos, cursorPos);
 }
+
+//Adds one tab indent on the current line
 
 function addIndent() {
     let element = document.getElementById("mainTextArea");
@@ -129,21 +150,26 @@ function addIndent() {
     element.setSelectionRange(cursorPos, cursorPos);
 }
 
+//Adds a bullet point to the start of every line
+
 function addBullet () {
     let element = document.getElementById("mainTextArea");
     element.value += "o";
 
 }
 
+//Disables the standard function of the tab key when the mainTextArea is selected
 
-function disableTab(id) {
-    let element = document.getElementById(id);
+function disableTab() {
+    let element = document.getElementById("mainTextArea");
     element.onkeydown = function (e) {
         if (e.keyCode === 9) {
             return false;
         }
     };
 }
+
+//Populates the openFile select control with al possible files
 
 function populateOptions() {
     for (var i = 0; i < localStorage.length; i++) {
@@ -156,18 +182,22 @@ function populateOptions() {
     }
 }
 
+//opens saved file
+
 function openFile () {
     const value = document.getElementById("openSelect").value;
     localStorage.setItem("load", value);
     getSave();
 }
+
+//adds all event listeners
+
 function boot() {
     window.left.addEventListener('click', click);
     window.right.addEventListener('click', click);
     window.up.addEventListener('click', click);
     window.down.addEventListener('click', click);
     window.mainAdd.addEventListener('click', click);
-  //  window.testButton.addEventListener('click', convertToArray);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
@@ -176,7 +206,7 @@ function boot() {
     window.addEventListener('unload', setSave);
     setInterval(setSave, 120000);
     getSave();
-    disableTab("mainTextArea");
+    disableTab();
     populateOptions();
 }
 
