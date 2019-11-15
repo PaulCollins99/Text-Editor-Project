@@ -1,3 +1,5 @@
+//JavaScript for the main editor
+
 'use strict';
 
 //An array that is used to track the level of indentation
