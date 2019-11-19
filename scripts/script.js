@@ -4,7 +4,8 @@
 
 //An array that is used to track the level of indentation
 
-let indentLog = []
+let indentLog = [];
+let overwrite = false;
 
 function click(e) {
     console.log(e.target.id);
@@ -34,9 +35,11 @@ function setSave () {
 //create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
 
 function saveAs () {
-    let value = document.getElementById("mainTextArea").value;
-    let title = document.getElementById("saveAsName").value;
+    const value = document.getElementById("mainTextArea").value;
+    const title = document.getElementById("saveAsName").value;
     localStorage.setItem("saveFile:".concat(title), value);
+    
+    
 }
 
 //Gets localStorage save states
@@ -174,7 +177,7 @@ function disableTab() {
 //Populates the openFile select control with al possible files
 
 function populateOptions() {
-    for (var i = 0; i < localStorage.length; i++) {
+    for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).substring(0, 9) == "saveFile:") {
             const option = document.createElement("option")
             option.value = localStorage.key(i).substring(9);
@@ -191,6 +194,7 @@ function openFile () {
     localStorage.setItem("load", value);
     getSave();
 }
+
 
 //adds all event listeners
 
