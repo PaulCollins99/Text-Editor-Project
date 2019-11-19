@@ -210,6 +210,9 @@ function boot() {
     getSave();
     disableTab();
     populateOptions();
+    window.onbeforeunload = function() {
+        return true;
+    };
 }
 
 window.addEventListener('load', boot);
