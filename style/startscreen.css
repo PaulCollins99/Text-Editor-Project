@@ -20,12 +20,12 @@ section {
     height: 10%;
     width: 20%;
     text-align: center;
+    background-color: white;
+    border: solid 1px black;
 
 }
 
-select, button, option, h4, section{
-    background-color: darkgray;
+h4 {
     color: black;
-    border: solid 1px black;
 }
 
