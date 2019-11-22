@@ -11,10 +11,6 @@ let indentLog = [];
 let overwrite = true;
 let alreadyChecked = false;
 
-//Active file
-
-let activeFile = "autoSave";
-
 //converts the mainTextArea into an array splitting at each new line
 
 function convertToArray (e) {
@@ -208,23 +204,45 @@ function updateTextArea (e) {
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
     activeFile = e.target.textContent;
 }
-//opens saved file
 
+function saveCache () {
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).substring(0, 6) == "cache:") {
+            
+            
+            
+            let name = localStorage.key(i);
+            
+            console.log(localStorage.key(i));
 
+            for (let i = 0; i < localStorage.length; i++) {
+                let value = localStorage.getItem("cache:" + name.substring(6));                
+                localStorage.setItem("saveFile:".concat(name.substring(6)), value) ;
+                   
+            }
+            
+            localStorage.removeItem(name);
+        }
+    }
+    console.log("activefile:" + activeFile);
+    
+    localStorage.setItem("saveFile:" + activeFile, document.getElementById("mainTextArea").value);
+
+}
 
 //adds all event listeners
 
 function boot() {
     window.mainTextArea.addEventListener('keydown', keydownHandler);
-    window.saveAsButton.addEventListener('click', saveAs);
-    window.addEventListener('unload', setSave);
-    setInterval(setSave, 120000);
-    getSave();
+    //window.saveAsButton.addEventListener('click', saveAs);
+    //window.addEventListener('unload', saveCache);
+    //getSave();
     disableTab();
-    populateSideBar();
+    //populateSideBar();
     window.onbeforeunload = function() {
         return true;
     };
+    
 }
 
 window.addEventListener('load', boot);

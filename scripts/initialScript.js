@@ -27,7 +27,7 @@ function navigate () {
 
 function newFile () {
     location.href = "editor.html";
-    localStorage.setItem("autoSave", "");
+    localStorage.setItem("load", "Unnamed File");
 }
 
 //adds event listeners

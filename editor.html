@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style/stylesheet.css" />
     <script src="scripts/script.js"></script>
+    <script src="scripts/fileManager.js"></script>
+
 </head>
 
 <body>
@@ -31,6 +33,7 @@
     <section id="centerText">
         <button id="saveAsButton" type="button">Save As</button>
         <input type="text" id="saveAsName">
+        <button id="quickSave" type="button">Quick Save</button>
     </section>
     <section id="rightHandTools">
         <!-- Remove basic save a load buttons 
@@ -46,9 +49,9 @@
         <textarea id="mainTextArea" placeholder="‣"></textarea>
     </main>
     <nav id="navigation">
-        <ul id="fileBar">
+        <ol id="fileBar">
             <li>Select a file</li>
-        </ul>
+        </ol>
     </nav>
     <footer>
         <p>Footer</p>
