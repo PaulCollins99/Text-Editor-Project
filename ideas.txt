@@ -1,0 +1,3 @@
+Title text box in the middle
+One save button
+check to see if there is any localStorage keys with cache (Clear them on exit unless saved into a saveFile)
