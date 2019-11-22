@@ -2,7 +2,6 @@
 
 'use strict';
 
-const MTA = document.getElementById("mainTextArea")
 
 //An array that is used to track the level of indentation
 
@@ -28,7 +27,8 @@ function getLineNumber() {
 //autoSave function
 
 function setSave () {
-    localStorage.setItem("autoSave", MTA.value);
+    let element = document.getElementById("mainTextArea");
+    localStorage.setItem("autoSave", element.value);
 }
 
 //create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
@@ -36,7 +36,7 @@ function setSave () {
 //need to finish filename already exists code
 
 function saveAs () {
-    const value = MTA.value;
+    const value = document.getElementById("mainTextArea").value;
     const title = document.getElementById("saveAsName").value;
     
     for (let i = 0; i < localStorage.length; i++) {
@@ -54,11 +54,12 @@ function saveAs () {
 //Gets localStorage save states
 
 function getSave () {
+    let element = document.getElementById("mainTextArea");
     let checkLoad = localStorage.getItem("load");
     if (checkLoad == "none") {
-        MTA.value = localStorage.getItem("autoSave");
+        element.value = localStorage.getItem("autoSave");
     } else {
-        MTA.value = localStorage.getItem("saveFile:" + checkLoad);
+        element.value = localStorage.getItem("saveFile:" + checkLoad);
         localStorage.setItem("load", "none");
     }
 }
@@ -86,9 +87,10 @@ function keydownHandler(e) {
 //Moves the line the cursor is on up
 
 function moveLineUp () {
+    let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
-    let stringArray = convertToArray(MTA);
-    let cursorPos = MTA.selectionStart;
+    let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart;
     let temp = stringArray[lineNumber - 1];
 
     if (lineNumber - 1 != 0) {
@@ -96,79 +98,85 @@ function moveLineUp () {
         stringArray[lineNumber - 2] = temp
     }
 
-    MTA.value = "";
-    MTA.value = stringArray.join("\n");
+    element.value = "";
+    element.value = stringArray.join("\n");
     
-    MTA.focus();
-    MTA.setSelectionRange(cursorPos, cursorPos);
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 
 }
 
 //Moves the line the cursor is on down
 
 function moveLineDown () {
+    let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
-    let stringArray = convertToArray(MTA);    
-    let cursorPos = MTA.selectionStart;
+    let stringArray = convertToArray(element);    
+    let cursorPos = element.selectionStart;
     let temp = stringArray[lineNumber - 1];
 
     stringArray[lineNumber - 1] = stringArray[lineNumber];
     stringArray[lineNumber] = temp
-    MTA.value = "";
-    MTA.value = stringArray.join("\n");
+    element.value = "";
+    element.value = stringArray.join("\n");
     
-    MTA.focus();
-    MTA.setSelectionRange(cursorPos, cursorPos);
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
     }
 
 //Removes one tab indent on the current line
 
 function outDent () {
+    let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
-    let stringArray = convertToArray(MTA);
-    let cursorPos = MTA.selectionStart;
+    let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart;
 
-    MTA.value = "";
+    element.value = "";
     if (stringArray[lineNumber - 1].substring(0,1) == "\t") {
         stringArray[lineNumber - 1] = stringArray[lineNumber - 1].substring(1);
         indentLog[lineNumber] -= 1;
     }
-    MTA.value = stringArray.join("\n");
+    element.value = stringArray.join("\n");
 
-    MTA.focus();
-    MTA.setSelectionRange(cursorPos, cursorPos);
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 }
 
 //Adds one tab indent on the current line
 
 function addIndent() {
+    let element = document.getElementById("mainTextArea");
     let lineNumber = getLineNumber();
-    let stringArray = convertToArray(MTA);
-    let cursorPos = MTA.selectionStart + 1;
+    let stringArray = convertToArray(element);
+    let cursorPos = element.selectionStart + 1;
 
-    MTA.value = "";
+    element.value = "";
     stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
-    MTA.value = stringArray.join("\n");
+    element.value = stringArray.join("\n");
     if (typeof indentLog[lineNumber] === "undefined") {
         indentLog[lineNumber] = 1;        
     } else {
         indentLog[lineNumber] += 1;        
     }
 
-    MTA.focus();
-    MTA.setSelectionRange(cursorPos, cursorPos);
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
 }
 
-//Adds a bullet point to the start of every line (To-Do)
+//Adds a bullet point to the start of every line
 
 function addBullet () {
+    let element = document.getElementById("mainTextArea");
+    element.value += "o";
 
 }
 
 //Disables the standard function of the tab key when the mainTextArea is selected
 
 function disableTab() {
-    MTA.onkeydown = function (e) {
+    let element = document.getElementById("mainTextArea");
+    element.onkeydown = function (e) {
         if (e.keyCode === 9) {
             return false;
         }
@@ -203,7 +211,8 @@ function populateSideBar () {
 }
 
 function updateTextArea (e) {
-    MTA.value = localStorage.getItem("saveFile:" + e.target.textContent);    
+    let element = document.getElementById("mainTextArea");
+    element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
     
 }
 //opens saved file
@@ -218,6 +227,10 @@ function openFile () {
 //adds all event listeners
 
 function boot() {
+    window.left.addEventListener('click', click);
+    window.right.addEventListener('click', click);
+    window.up.addEventListener('click', click);
+    window.down.addEventListener('click', click);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
