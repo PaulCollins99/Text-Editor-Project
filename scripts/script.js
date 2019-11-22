@@ -37,6 +37,8 @@ function setSave () {
 
 //create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
 
+//need to finish filename already exists code
+
 function saveAs () {
     const value = document.getElementById("mainTextArea").value;
     const title = document.getElementById("saveAsName").value;
@@ -198,6 +200,23 @@ function populateOptions() {
     }
 }
 
+function populateSideBar () {
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).substring(0, 9) == "saveFile:") {
+         const tab = document.createElement("li");
+         tab.textContent = localStorage.key(i).substring(9);
+         tab.value = localStorage.key(i).substring(9);
+         tab.addEventListener('click', updateTextArea);
+         document.getElementById("fileBar").appendChild(tab);
+        }
+    }
+}
+
+function updateTextArea (e) {
+    let element = document.getElementById("mainTextArea");
+    element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
+    
+}
 //opens saved file
 
 function openFile () {
@@ -214,7 +233,6 @@ function boot() {
     window.right.addEventListener('click', click);
     window.up.addEventListener('click', click);
     window.down.addEventListener('click', click);
-    window.mainAdd.addEventListener('click', click);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
@@ -225,6 +243,7 @@ function boot() {
     getSave();
     disableTab();
     populateOptions();
+    populateSideBar();
     window.onbeforeunload = function() {
         return true;
     };
