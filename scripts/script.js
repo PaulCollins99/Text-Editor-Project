@@ -2,14 +2,18 @@
 
 'use strict';
 
-
 //An array that is used to track the level of indentation
 
 let indentLog = [];
 
-//
+//double check that you want to overwrite a line
 
 let overwrite = true;
+let alreadyChecked = false;
+
+//Active file
+
+let activeFile = "autoSave";
 
 //converts the mainTextArea into an array splitting at each new line
 
@@ -33,21 +37,29 @@ function setSave () {
 
 //create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
 
-//need to finish filename already exists code
+//need to finish filename already exists code re-write this section
 
 function saveAs () {
     const value = document.getElementById("mainTextArea").value;
     const title = document.getElementById("saveAsName").value;
     
     for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(9) == title) {
-            console.log("Filename already exists");
-            overwrite = false
+        if (localStorage.key(i).substring(9) == title && alreadyChecked == false) {
+            
+                overwrite = false
+            
         }
     }
 
-    if (overwrite == true) {
+    if (overwrite == true || alreadyChecked == true) {
         localStorage.setItem("saveFile:".concat(title), value);
+        alreadyChecked = false;
+        alert("File saved succesfully")
+    } else {
+        overwrite = false;
+        alreadyChecked = true;
+        alert("File name already exists, press save as button again to overwrite the file")
+        
     }
 }
 
@@ -59,6 +71,7 @@ function getSave () {
     if (checkLoad == "none") {
         element.value = localStorage.getItem("autoSave");
     } else {
+        activeFile = checkLoad;
         element.value = localStorage.getItem("saveFile:" + checkLoad);
         localStorage.setItem("load", "none");
     }
@@ -164,14 +177,6 @@ function addIndent() {
     element.setSelectionRange(cursorPos, cursorPos);
 }
 
-//Adds a bullet point to the start of every line
-
-function addBullet () {
-    let element = document.getElementById("mainTextArea");
-    element.value += "o";
-
-}
-
 //Disables the standard function of the tab key when the mainTextArea is selected
 
 function disableTab() {
@@ -212,8 +217,9 @@ function populateSideBar () {
 
 function updateTextArea (e) {
     let element = document.getElementById("mainTextArea");
+    localStorage.setItem("cache:" + activeFile, element.value);
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
-    
+    activeFile = e.target.textContent;
 }
 //opens saved file
 
@@ -227,10 +233,6 @@ function openFile () {
 //adds all event listeners
 
 function boot() {
-    window.left.addEventListener('click', click);
-    window.right.addEventListener('click', click);
-    window.up.addEventListener('click', click);
-    window.down.addEventListener('click', click);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
