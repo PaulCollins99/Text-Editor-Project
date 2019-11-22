@@ -188,19 +188,6 @@ function disableTab() {
     };
 }
 
-//Populates the openFile select control with al possible files
-
-function populateOptions() {
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0, 9) == "saveFile:") {
-            const option = document.createElement("option")
-            option.value = localStorage.key(i).substring(9);
-            option.textContent = localStorage.key(i).substring(9);
-            document.getElementById("openSelect").appendChild(option);
-        }
-    }
-}
-
 //current id and update changes, cache changes user has to save manually to save over the file
 
 function populateSideBar () {
@@ -223,26 +210,17 @@ function updateTextArea (e) {
 }
 //opens saved file
 
-function openFile () {
-    const value = document.getElementById("openSelect").value;
-    localStorage.setItem("load", value);
-    getSave();
-}
 
 
 //adds all event listeners
 
 function boot() {
     window.mainTextArea.addEventListener('keydown', keydownHandler);
-    window.save.addEventListener('click', setSave);
-    window.load.addEventListener('click', getSave);
     window.saveAsButton.addEventListener('click', saveAs);
-    window.openButton.addEventListener('click', openFile);
     window.addEventListener('unload', setSave);
     setInterval(setSave, 120000);
     getSave();
     disableTab();
-    populateOptions();
     populateSideBar();
     window.onbeforeunload = function() {
         return true;
