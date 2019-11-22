@@ -5,7 +5,10 @@
 //An array that is used to track the level of indentation
 
 let indentLog = [];
-let overwrite = false;
+
+//
+
+let overwrite = true;
 
 function click(e) {
     console.log(e.target.id);
@@ -37,9 +40,17 @@ function setSave () {
 function saveAs () {
     const value = document.getElementById("mainTextArea").value;
     const title = document.getElementById("saveAsName").value;
-    localStorage.setItem("saveFile:".concat(title), value);
     
-    
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).substring(9) == title) {
+            console.log("Filename already exists");
+            overwrite = false
+        }
+    }
+
+    if (overwrite == true) {
+        localStorage.setItem("saveFile:".concat(title), value);
+    }
 }
 
 //Gets localStorage save states
