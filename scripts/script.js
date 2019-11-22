@@ -2,7 +2,7 @@
 
 'use strict';
 
-const MTA = document.getElementById("mainTextarea")
+const MTA = document.getElementById("mainTextArea")
 
 //An array that is used to track the level of indentation
 
