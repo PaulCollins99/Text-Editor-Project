@@ -218,10 +218,6 @@ function openFile () {
 //adds all event listeners
 
 function boot() {
-    window.left.addEventListener('click', click);
-    window.right.addEventListener('click', click);
-    window.up.addEventListener('click', click);
-    window.down.addEventListener('click', click);
     window.mainTextArea.addEventListener('keydown', keydownHandler);
     window.save.addEventListener('click', setSave);
     window.load.addEventListener('click', getSave);
