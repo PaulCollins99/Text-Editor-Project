@@ -11,24 +11,9 @@
 }
 
 body {
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 8fr 0.5fr;
-    grid-template-areas: "tool centerText tool2"
-                         "navbar textblock textblock"
-                         "foot foot foot";
-
-    height: 100vh;
+    
     background-color: var(--myMain);
     color: var(--textColour);
-}
-
-#circle-container {
-    text-align: center;
-}
-
-header {
-    padding: 1em 1em 1em;
 }
 
 button {
@@ -60,7 +45,6 @@ select {
 
 
 #toolbar {
-    grid-area: tool;
     border-bottom: 1px solid var(--myMain);
     padding: 1em 1em 1em;
 }
@@ -70,7 +54,6 @@ select {
 }
 
 #centerText {
-    grid-area: centerText;
     padding: 1em 1em 1em;
     text-align: center; 
 }
@@ -80,13 +63,11 @@ select {
 }
 
 #rightHandTools {
-    grid-area: tool2;
     border-bottom: 1px solid var(--myMain);
     padding: 1em 1em 1em;
 }
 
 #mainText {
-    grid-area: textblock;
     overflow: hidden;
     border: solid 1px var(--textColour);    
 
@@ -99,7 +80,6 @@ select {
 
 
 nav {
-    grid-area: navbar;
     text-align: center;
     background-color: var(--myMain);
 
@@ -110,7 +90,6 @@ nav input {
 }
 
 footer {
-    grid-area: foot;
     background-color: var(--myMain);
 }
 

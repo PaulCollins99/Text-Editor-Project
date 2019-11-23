@@ -1,0 +1,35 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 8fr 0.5fr;
+    grid-template-areas: "tool centerText tool2"
+                         "navbar textblock textblock"
+                         "foot foot foot";
+
+    height: 100vh;
+}
+
+#toolbar {
+    grid-area: tool;
+}
+
+#centerText {
+    grid-area: centerText;
+}
+
+#rightHandTools {
+    grid-area: tool2;
+}
+
+#mainText {
+    grid-area: textblock;
+}
+
+nav {
+    grid-area: navbar;
+
+}
+
+footer {
+    grid-area: foot;
+}
