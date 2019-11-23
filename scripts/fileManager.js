@@ -39,8 +39,8 @@ function save() {
     let element = document.getElementById("mainTextArea");
     if (activeFile != "Unnamed File") {
         localStorage.setItem("saveFile:" + activeFile, element.value);
-        alert("Save Succesfull");
-    } else {
+    } 
+    else {
         localStorage.setItem("Unnamed File", element.value);
     }
 }
@@ -82,6 +82,7 @@ function updateTextArea(e) {
 function boot() {
     window.saveAsButton.addEventListener('click', saveAs);
     window.quickSave.addEventListener('click', save);
+    window.addEventListener('unload', save);
     initialLoad();
     populateSideBar();
 }

@@ -6,11 +6,6 @@
 
 let indentLog = [];
 
-//double check that you want to overwrite a line
-
-let overwrite = true;
-let alreadyChecked = false;
-
 //converts the mainTextArea into an array splitting at each new line
 
 function convertToArray (e) {
