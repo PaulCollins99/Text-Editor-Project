@@ -113,6 +113,10 @@ footer {
     background-color: lightgray;
 }
 
+.highlight {
+    border: solid 1px red;
+}
+
 @media (max-width:1800px) {
     body {
         grid-template-columns: 1fr 7fr 1fr;

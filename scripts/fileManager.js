@@ -63,7 +63,17 @@ function populateSideBar() {
 }
 
 function updateTextArea(e) {
+
+    
+    let oldElement = document.querySelector(".highlight")
+    
+    if (oldElement != null) {
+        oldElement.classList.remove("highlight")
+    }
+    
+
     save();
+    e.target.classList.add("highlight")
     let element = document.getElementById("mainTextArea");
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);
     activeFile = e.target.textContent;
