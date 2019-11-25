@@ -49,9 +49,7 @@ select {
     padding: 1em 1em 1em;
 }
 
-#topSide, #bottomSide {
-    padding-left: 20px;
-}
+
 
 #centerText {
     padding: 1em 1em 1em;
@@ -70,7 +68,6 @@ select {
 #mainText {
     overflow: hidden;
     border: solid 1px var(--textColour);    
-
 }
 
 #mainText textarea {
@@ -89,45 +86,8 @@ nav input {
     margin-bottom: 0.5em;
 }
 
-footer {
-    background-color: var(--myMain);
-}
 
 .highlight {
     border: solid 1px var(--altColour);
 }
 
-@media (max-width:1800px) {
-    body {
-        grid-template-columns: 1fr 7fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
-    }
-
-}
-
-
-@media (max-width:1200px) {
-    body {
-        grid-template-columns: 1fr 6fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
-    }
-
-}
-
-
-@media (max-width:800px) {
-    body {
-        grid-template-columns: 1fr 5fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
-    }
-
-}
-
-
-@media (max-width:400px) {
-    body {
-        grid-template-columns: 1fr 4fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
-    }
-
-}
