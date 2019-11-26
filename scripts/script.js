@@ -136,6 +136,10 @@ function outDent () {
     let stringArray = convertToArray(element);
     let cursorPos = element.selectionStart;
 
+    console.log("Cursor pos" + cursorPos);
+    console.log("Line number" + lineNumber);
+    
+
     element.value = "";
     if (stringArray[lineNumber - 1].substring(0,1) == "\t") {
         stringArray[lineNumber - 1] = stringArray[lineNumber - 1].substring(1);
@@ -144,7 +148,7 @@ function outDent () {
     element.value = stringArray.join("\n");
 
     element.focus();
-    element.setSelectionRange(cursorPos, cursorPos);
+    element.setSelectionRange(cursorPos - 1, cursorPos - 1);
 }
 
 //Adds one tab indent on the current line
