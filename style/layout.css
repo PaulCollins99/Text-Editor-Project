@@ -1,6 +1,6 @@
 body {
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 5fr 3fr;
     grid-template-rows: 1fr 8fr 0.5fr;
     grid-template-areas: "tool centerText tool2"
                          "navbar textblock textblock"
