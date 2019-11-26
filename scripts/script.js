@@ -21,52 +21,15 @@ function getLineNumber() {
 
 //autoSave function
 
-function setSave () {
-    let element = document.getElementById("mainTextArea");
-    localStorage.setItem("autoSave", element.value);
-}
 
 //create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
 
 //need to finish filename already exists code re-write this section
 
-function saveAs () {
-    const value = document.getElementById("mainTextArea").value;
-    const title = document.getElementById("saveAsName").value;
-    
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(9) == title && alreadyChecked == false) {
-            
-                overwrite = false
-            
-        }
-    }
 
-    if (overwrite == true || alreadyChecked == true) {
-        localStorage.setItem("saveFile:".concat(title), value);
-        alreadyChecked = false;
-        alert("File saved succesfully")
-    } else {
-        overwrite = false;
-        alreadyChecked = true;
-        alert("File name already exists, press save as button again to overwrite the file")
-        
-    }
-}
 
 //Gets localStorage save states
 
-function getSave () {
-    let element = document.getElementById("mainTextArea");
-    let checkLoad = localStorage.getItem("load");
-    if (checkLoad == "none") {
-        element.value = localStorage.getItem("autoSave");
-    } else {
-        activeFile = checkLoad;
-        element.value = localStorage.getItem("saveFile:" + checkLoad);
-        localStorage.setItem("load", "none");
-    }
-}
 
 //Handles all keyboard inputs
 
@@ -199,41 +162,11 @@ function updateTextArea (e) {
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
     activeFile = e.target.textContent;
 }
-
-function saveCache () {
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0, 6) == "cache:") {
-            
-            
-            
-            let name = localStorage.key(i);
-            
-            console.log(localStorage.key(i));
-
-            for (let i = 0; i < localStorage.length; i++) {
-                let value = localStorage.getItem("cache:" + name.substring(6));                
-                localStorage.setItem("saveFile:".concat(name.substring(6)), value) ;
-                   
-            }
-            
-            localStorage.removeItem(name);
-        }
-    }
-    console.log("activefile:" + activeFile);
-    
-    localStorage.setItem("saveFile:" + activeFile, document.getElementById("mainTextArea").value);
-
-}
-
 //adds all event listeners
 
 function boot() {
     window.mainTextArea.addEventListener('keydown', keydownHandler);
-    //window.saveAsButton.addEventListener('click', saveAs);
-    //window.addEventListener('unload', saveCache);
-    //getSave();
     disableTab();
-    //populateSideBar();
     window.onbeforeunload = function() {
         return true;
     };
