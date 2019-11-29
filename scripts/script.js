@@ -19,18 +19,6 @@ function getLineNumber() {
     return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split("\n").length;
 }
 
-//autoSave function
-
-
-//create a file with a identifier (saveFile:) followed by a user specified name e.g. saveFile:Filename
-
-//need to finish filename already exists code re-write this section
-
-
-
-//Gets localStorage save states
-
-
 //Handles all keyboard inputs
 
 function keydownHandler(e) {
