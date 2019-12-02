@@ -46,6 +46,8 @@ function moveLineUp () {
     let lineNumber = getLineNumber();
     let stringArray = convertToArray(element);
     let cursorPos = element.selectionStart;
+    console.log(lineNumber);
+    
     let temp = stringArray[lineNumber - 1];
 
     if (lineNumber - 1 != 0) {
@@ -154,6 +156,10 @@ function updateTextArea (e) {
 
 function boot() {
     window.mainTextArea.addEventListener('keydown', keydownHandler);
+    window.left.addEventListener('click', outDent);
+    window.right.addEventListener('click', addIndent);
+    window.up.addEventListener('click', moveLineUp);
+    window.down.addEventListener('click', moveLineDown);
     disableTab();
     window.onbeforeunload = function() {
         return true;
