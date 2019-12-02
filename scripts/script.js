@@ -146,6 +146,19 @@ function populateSideBar () {
     }
 }
 
+function downloadToTxt(){
+    let value = document.getElementById("mainTextArea").value.replace(/\n/g, "\r\n");
+    let blob = new Blob([value], { type: "text/plain"});
+    let element = document.createElement("a");
+    element.download = "my-filename.txt";
+    element.href = window.URL.createObjectURL(blob);
+    element.target ="_blank";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+ }
+
+
 function updateTextArea (e) {
     let element = document.getElementById("mainTextArea");
     localStorage.setItem("cache:" + activeFile, element.value);

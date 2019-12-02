@@ -1,16 +1,14 @@
 'use strict';
 
-let activeFile;
-
 function initialLoad() {
     let fileToLoad = localStorage.getItem("load");
     let element = document.getElementById("mainTextArea");
     if (fileToLoad != "") {
         element.value = localStorage.getItem("saveFile:" + fileToLoad);
-        activeFile = fileToLoad;
+        localStorage.setItem("activeFile", fileToLoad)
     } else {
         element.value = localStorage.getItem("Unnamed File");
-        activeFile = "Unnamed File";
+        localStorage.setItem("activeFile", "Unnamed File")
     }
 }
 
@@ -31,14 +29,13 @@ function saveAs() {
     tab.addEventListener('click', updateTextArea);
     document.getElementById("fileBar").appendChild(tab);
 
-    activeFile = title;
-
+    localStorage.setItem("activeFile", title)
 }
 
 function save() {
     let element = document.getElementById("mainTextArea");
-    if (activeFile != "Unnamed File") {
-        localStorage.setItem("saveFile:" + activeFile, element.value);
+    if (localStorage.getItem("activeFile") != "Unnamed File") {
+        localStorage.setItem("saveFile:" + localStorage.getItem("activeFile"), element.value);
     } 
     else {
         localStorage.setItem("Unnamed File", element.value);
@@ -70,13 +67,12 @@ function updateTextArea(e) {
     if (oldElement != null) {
         oldElement.classList.remove("highlight")
     }
-    
 
     save();
     e.target.classList.add("highlight")
     let element = document.getElementById("mainTextArea");
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);
-    activeFile = e.target.textContent;
+    localStorage.setItem("activeFile", e.target.textContent);
 }
 
 function boot() {
