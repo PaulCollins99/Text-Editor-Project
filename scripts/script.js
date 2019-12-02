@@ -150,7 +150,7 @@ function downloadToTxt(){
     let value = document.getElementById("mainTextArea").value.replace(/\n/g, "\r\n");
     let blob = new Blob([value], { type: "text/plain"});
     let element = document.createElement("a");
-    element.download = "my-filename.txt";
+    element.download = localStorage.getItem("activeFile");
     element.href = window.URL.createObjectURL(blob);
     element.target ="_blank";
     document.body.appendChild(element);
