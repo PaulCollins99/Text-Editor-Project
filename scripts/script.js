@@ -121,6 +121,8 @@ function addIndent() {
     element.setSelectionRange(cursorPos, cursorPos);
 }
 
+//A function that allows the user to download their note as a text document.
+
 function downloadToTxt(){
     let value = document.getElementById("mainTextArea").value.replace(/\n/g, "\r\n");
     let blob = new Blob([value], { type: "text/plain"});
@@ -133,14 +135,6 @@ function downloadToTxt(){
     document.body.removeChild(element);
  }
 
-
-function updateTextArea (e) {
-    let element = document.getElementById("mainTextArea");
-    localStorage.setItem("cache:" + activeFile, element.value);
-    element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
-    activeFile = e.target.textContent;
-}
-
 //Disables the standard function of the tab key when the mainTextArea is selected
 
 function disableTab() {
@@ -152,7 +146,8 @@ function disableTab() {
     };
 }
 
-//adds all event listeners
+//adds all event listeners, calls the function that disbales tab on the mainTextArea, 
+//and add functionallity to allow the user to cancel an unload
 
 function boot() {
     window.mainTextArea.addEventListener('keydown', keydownHandler);
