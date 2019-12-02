@@ -1,5 +1,7 @@
 'use strict';
 
+//function that runs when the page is first loaded
+
 function initialLoad() {
     let fileToLoad = localStorage.getItem("load");
     let element = document.getElementById("mainTextArea");
@@ -11,6 +13,8 @@ function initialLoad() {
         localStorage.setItem("activeFile", "Unnamed File");
     }
 }
+
+//Allows the user to save a file and give it a new name
 
 function saveAs() {
     let element = document.getElementById("mainTextArea");
@@ -32,6 +36,8 @@ function saveAs() {
     localStorage.setItem("activeFile", title);
 }
 
+//Overwrites a save with the same name
+
 function save() {
     let element = document.getElementById("mainTextArea");
     if (localStorage.getItem("activeFile") != "Unnamed File") {
@@ -42,11 +48,14 @@ function save() {
     }
 }
 
+//loads the Unnamed File
+
 function load() {
     let element = document.getElementById("mainTextArea");
     element.value = localStorage.getItem("Unnamed File");
 }
 
+//Loops through all the saveFiles in the local storage and cuts their names out to create a nav list on the side of the page
 
 function populateSideBar() {
     for (let i = 0; i < localStorage.length; i++) {
@@ -59,8 +68,9 @@ function populateSideBar() {
     }
 }
 
-function updateTextArea(e) {
+//Code that allows the user to click on the items to load the corresponding pages
 
+function updateTextArea(e) {
     
     let oldElement = document.querySelector(".highlight")
     
