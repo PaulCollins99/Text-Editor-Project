@@ -121,31 +121,6 @@ function addIndent() {
     element.setSelectionRange(cursorPos, cursorPos);
 }
 
-//Disables the standard function of the tab key when the mainTextArea is selected
-
-function disableTab() {
-    let element = document.getElementById("mainTextArea");
-    element.onkeydown = function (e) {
-        if (e.keyCode === 9) {
-            return false;
-        }
-    };
-}
-
-//current id and update changes, cache changes user has to save manually to save over the file
-
-function populateSideBar () {
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0, 9) == "saveFile:") {
-         const tab = document.createElement("li");
-         tab.textContent = localStorage.key(i).substring(9);
-         tab.value = localStorage.key(i).substring(9);
-         tab.addEventListener('click', updateTextArea);
-         document.getElementById("fileBar").appendChild(tab);
-        }
-    }
-}
-
 function downloadToTxt(){
     let value = document.getElementById("mainTextArea").value.replace(/\n/g, "\r\n");
     let blob = new Blob([value], { type: "text/plain"});
@@ -165,6 +140,18 @@ function updateTextArea (e) {
     element.value = localStorage.getItem("saveFile:" + e.target.textContent);    
     activeFile = e.target.textContent;
 }
+
+//Disables the standard function of the tab key when the mainTextArea is selected
+
+function disableTab() {
+    let element = document.getElementById("mainTextArea");
+    element.onkeydown = function (e) {
+        if (e.keyCode === 9) {
+            return false;
+        }
+    };
+}
+
 //adds all event listeners
 
 function boot() {
