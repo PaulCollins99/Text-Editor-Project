@@ -16,40 +16,45 @@ body {
     color: var(--textColour);
 }
 
+/* Standard button design */
+
 button {
 	border: 1px solid var(--myMain);
     border-radius: 15%;
     margin: 2px;
-	width: 60px;
-	height: 40px;
+	width: 5em;
+	height: 2.5em;
     z-index: 86;
     display: inline-block;
     outline: none;
     background-color: var(--altColour);
 }
 
+/* button click effects */
+
 button:active, button:focus, select:active , select:focus {
     border-color: black;
     box-shadow: 0 0 3px black;
 }
 
+/* Section with indent and outdent buttons in*/
+#toolbar {
+    padding: 1em 1em 1em;
+}
+
+#toolbar button {
+    width: 2.5em;
+}
+
 select {
     border: 1px solid var(--myMain);
-    border-radius: 50px;
+    border-radius:  50px;
     width: 10em;
     margin: 2px;
     z-index: 86;
     outline: none;
     display: inline-block;
 }
-
-
-#toolbar {
-    border-bottom: 1px solid var(--myMain);
-    padding: 1em 1em 1em;
-}
-
-
 
 #centerText {
     padding: 1em 1em 1em;
