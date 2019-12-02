@@ -5,10 +5,10 @@ function initialLoad() {
     let element = document.getElementById("mainTextArea");
     if (fileToLoad != "") {
         element.value = localStorage.getItem("saveFile:" + fileToLoad);
-        localStorage.setItem("activeFile", fileToLoad)
+        localStorage.setItem("activeFile", fileToLoad);
     } else {
         element.value = localStorage.getItem("Unnamed File");
-        localStorage.setItem("activeFile", "Unnamed File")
+        localStorage.setItem("activeFile", "Unnamed File");
     }
 }
 
@@ -29,7 +29,7 @@ function saveAs() {
     tab.addEventListener('click', updateTextArea);
     document.getElementById("fileBar").appendChild(tab);
 
-    localStorage.setItem("activeFile", title)
+    localStorage.setItem("activeFile", title);
 }
 
 function save() {

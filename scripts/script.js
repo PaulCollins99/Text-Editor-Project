@@ -173,6 +173,7 @@ function boot() {
     window.right.addEventListener('click', addIndent);
     window.up.addEventListener('click', moveLineUp);
     window.down.addEventListener('click', moveLineDown);
+    window.download.addEventListener('click', downloadToTxt);
     disableTab();
     window.onbeforeunload = function() {
         return true;
