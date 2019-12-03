@@ -1,3 +1,4 @@
+'use strict';
 
 // function that runs when the page is first loaded
 

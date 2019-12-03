@@ -1,3 +1,5 @@
+'use strict';
+
 // JavaScript file for the start screen
 // Populates the open file select control with filenames found in local storage
 
