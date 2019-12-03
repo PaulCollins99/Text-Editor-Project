@@ -1,166 +1,163 @@
-//JavaScript for the main editor
+// JavaScript for the main editor
+// An array that is used to track the level of indentation
 
-'use strict';
+const indentLog = [];
 
-//An array that is used to track the level of indentation
+// converts the mainTextArea into an array splitting at each new line
 
-let indentLog = [];
-
-//converts the mainTextArea into an array splitting at each new line
-
-function convertToArray () {
-    let stringArray = document.getElementById("mainTextArea").value.split("\n");
-    return stringArray;
+function convertToArray() {
+  const stringArray = document.getElementById('mainTextArea').value.split('\n');
+  return stringArray;
 }
 
-//gets current line number for cursor
+// gets current line number for cursor
 
 function getLineNumber() {
-    return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split("\n").length;
+  return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split('\n').length;
 }
 
-//Handles all keyboard inputs
+// Handles all keyboard inputs
 
 function keydownHandler(e) {
-    
-    if (e.shiftKey && e.key == "Tab") {
-        outDent();
-    }
-    else if (!e.shiftKey && e.key === "Tab") {
-        addIndent();
-    }
-    if (e.key == "Enter") {
-       //add bullet points in here addBullet();
-    }
-    if (e.ctrlKey && e.key == "ArrowUp") {
-        moveLineUp();
-    } else if (e.ctrlKey && e.key == "ArrowDown") {
-        moveLineDown();
-    }
+
+  if (e.shiftKey && e.key == 'Tab') {
+    outDent();
+  }
+  else if (!e.shiftKey && e.key === 'Tab') {
+    addIndent();
+  }
+  if (e.key == 'Enter') {
+    // add bullet points in here addBullet();
+  }
+  if (e.ctrlKey && e.key == 'ArrowUp') {
+    moveLineUp();
+  } else if (e.ctrlKey && e.key == 'ArrowDown') {
+    moveLineDown();
+  }
 }
 
-//Moves the line the cursor is on up
+// Moves the line the cursor is on up
 
-function moveLineUp () {
-    let element = document.getElementById("mainTextArea");
-    let lineNumber = getLineNumber();
-    let stringArray = convertToArray(element);
-    let cursorPos = element.selectionStart;
-    console.log(lineNumber);
-    
-    let temp = stringArray[lineNumber - 1];
+function moveLineUp() {
+  const element = document.getElementById('mainTextArea');
+  const lineNumber = getLineNumber();
+  const stringArray = convertToArray(element);
+  const cursorPos = element.selectionStart;
+  console.log(lineNumber);
 
-    if (lineNumber - 1 != 0) {
-        stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
-        stringArray[lineNumber - 2] = temp
-    }
+  const temp = stringArray[lineNumber - 1];
 
-    element.value = "";
-    element.value = stringArray.join("\n");
-    
-    element.focus();
-    element.setSelectionRange(cursorPos, cursorPos);
+  if (lineNumber - 1 != 0) {
+    stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
+    stringArray[lineNumber - 2] = temp;
+  }
+
+  element.value = '';
+  element.value = stringArray.join('\n');
+
+  element.focus();
+  element.setSelectionRange(cursorPos, cursorPos);
 
 }
 
-//Moves the line the cursor is on down
+// Moves the line the cursor is on down
 
-function moveLineDown () {
-    let element = document.getElementById("mainTextArea");
-    let lineNumber = getLineNumber();
-    let stringArray = convertToArray(element);    
-    let cursorPos = element.selectionStart;
-    let temp = stringArray[lineNumber - 1];
+function moveLineDown() {
+  const element = document.getElementById('mainTextArea');
+  const lineNumber = getLineNumber();
+  const stringArray = convertToArray(element);
+  const cursorPos = element.selectionStart;
+  const temp = stringArray[lineNumber - 1];
 
-    stringArray[lineNumber - 1] = stringArray[lineNumber];
-    stringArray[lineNumber] = temp
-    element.value = "";
-    element.value = stringArray.join("\n");
-    
-    element.focus();
-    element.setSelectionRange(cursorPos, cursorPos);
-    }
+  stringArray[lineNumber - 1] = stringArray[lineNumber];
+  stringArray[lineNumber] = temp;
+  element.value = '';
+  element.value = stringArray.join('\n');
 
-//Removes one tab indent on the current line
-
-function outDent () {
-    let element = document.getElementById("mainTextArea");
-    let lineNumber = getLineNumber();
-    let stringArray = convertToArray(element);
-    let cursorPos = element.selectionStart;
-
-    element.value = "";
-    if (stringArray[lineNumber - 1].substring(0,1) == "\t") {
-        stringArray[lineNumber - 1] = stringArray[lineNumber - 1].substring(1);
-        indentLog[lineNumber] -= 1;
-    }
-    element.value = stringArray.join("\n");
-
-    element.focus();
-    element.setSelectionRange(cursorPos - 1, cursorPos - 1);
+  element.focus();
+  element.setSelectionRange(cursorPos, cursorPos);
 }
 
-//Adds one tab indent on the current line
+// Removes one tab indent on the current line
+
+function outDent() {
+  const element = document.getElementById('mainTextArea');
+  const lineNumber = getLineNumber();
+  const stringArray = convertToArray(element);
+  const cursorPos = element.selectionStart;
+
+  element.value = '';
+  if (stringArray[lineNumber - 1].substring(0, 1) == '\t') {
+    stringArray[lineNumber - 1] = stringArray[lineNumber - 1].substring(1);
+    indentLog[lineNumber] -= 1;
+  }
+  element.value = stringArray.join('\n');
+
+  element.focus();
+  element.setSelectionRange(cursorPos - 1, cursorPos - 1);
+}
+
+// Adds one tab indent on the current line
 
 function addIndent() {
-    let element = document.getElementById("mainTextArea");
-    let lineNumber = getLineNumber();
-    let stringArray = convertToArray(element);
-    let cursorPos = element.selectionStart + 1;
+  const element = document.getElementById('mainTextArea');
+  const lineNumber = getLineNumber();
+  const stringArray = convertToArray(element);
+  const cursorPos = element.selectionStart + 1;
 
-    element.value = "";
-    stringArray[lineNumber - 1] = "\t" + stringArray[lineNumber - 1];
-    element.value = stringArray.join("\n");
-    if (typeof indentLog[lineNumber] === "undefined") {
-        indentLog[lineNumber] = 1;        
-    } else {
-        indentLog[lineNumber] += 1;        
-    }
+  element.value = '';
+  stringArray[lineNumber - 1] = '\t' + stringArray[lineNumber - 1];
+  element.value = stringArray.join('\n');
+  if (typeof indentLog[lineNumber] === 'undefined') {
+    indentLog[lineNumber] = 1;
+  } else {
+    indentLog[lineNumber] += 1;
+  }
 
-    element.focus();
-    element.setSelectionRange(cursorPos, cursorPos);
+  element.focus();
+  element.setSelectionRange(cursorPos, cursorPos);
 }
 
-//A function that allows the user to download their note as a text document.
+// A function that allows the user to download their note as a text document.
 
-function downloadToTxt(){
-    let value = document.getElementById("mainTextArea").value.replace(/\n/g, "\r\n");
-    let blob = new Blob([value], { type: "text/plain"});
-    let element = document.createElement("a");
-    element.download = localStorage.getItem("activeFile") + ".txt";
-    element.href = window.URL.createObjectURL(blob);
-    element.target ="_blank";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
- }
+function downloadToTxt() {
+  const value = document.getElementById('mainTextArea').value.replace(/\n/g, '\r\n');
+  const blob = new Blob([value], { type: 'text/plain' });
+  const element = document.createElement('a');
+  element.download = `${localStorage.getItem("activeFile")  }.txt`;
+  element.href = window.URL.createObjectURL(blob);
+  element.target = '_blank';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
 
-//Disables the standard function of the tab key when the mainTextArea is selected
+// Disables the standard function of the tab key when the mainTextArea is selected
 
 function disableTab() {
-    let element = document.getElementById("mainTextArea");
-    element.onkeydown = function (e) {
-        if (e.keyCode === 9) {
-            return false;
-        }
-    };
+  const element = document.getElementById('mainTextArea');
+  element.onkeydown = function (e) {
+    if (e.keyCode === 9) {
+      return false;
+    }
+  };
 }
 
-//adds all event listeners, calls the function that disbales tab on the mainTextArea, 
-//and add functionallity to allow the user to cancel an unload
+// adds all event listeners, calls the function that disbales tab on the mainTextArea,
+// and add functionallity to allow the user to cancel an unload
 
 function boot() {
-    window.mainTextArea.addEventListener('keydown', keydownHandler);
-    window.left.addEventListener('click', outDent);
-    window.right.addEventListener('click', addIndent);
-    window.up.addEventListener('click', moveLineUp);
-    window.down.addEventListener('click', moveLineDown);
-    window.download.addEventListener('click', downloadToTxt);
-    disableTab();
-    window.onbeforeunload = function() {
-        return true;
-    };
-    
+  window.mainTextArea.addEventListener('keydown', keydownHandler);
+  window.left.addEventListener('click', outDent);
+  window.right.addEventListener('click', addIndent);
+  window.up.addEventListener('click', moveLineUp);
+  window.down.addEventListener('click', moveLineDown);
+  window.download.addEventListener('click', downloadToTxt);
+  disableTab();
+  window.onbeforeunload = function () {
+    return true;
+  };
+
 }
 
 window.addEventListener('load', boot);
