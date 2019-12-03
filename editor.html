@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<!-- Left hand tools that allow manually line moves and indenting -->
     <section id="toolbar">
         <div id="topSide">
             <button id="left" type="button">←</button>
@@ -31,12 +32,14 @@
             <button id="down" type="button">↓</button>
         </div>
     </section>
+    <!-- Center section with save as and download-->
     <section id="centerText">
         <button id="saveAsButton" type="button">Save As</button>
         <input type="text" id="saveAsName" placeholder="File name:">
         <button id="quickSave" type="button">Quick Save</button>
         <button type="button" id="download">Download</button>
     </section>
+    <!-- Hotkey Reminder-->
     <section id="rightHandTools">
         <h3>Hotkeys:</h3>
         <ul>
@@ -48,8 +51,9 @@
     </section>
 
     <main id="mainText">
-        <textarea id="mainTextArea" placeholder="‣"></textarea>
+        <textarea id="mainTextArea"></textarea>
     </main>
+    <!-- Nav bar found on the left of the screen-->
     <nav id="navigation">
         <ol id="fileBar">
             <li>Select a file</li>

@@ -3,45 +3,55 @@ body {
     grid-template-columns: 1fr 5fr 3fr;
     grid-template-rows: 1fr 8fr 0.5fr;
     grid-template-areas: "tool centerText tool2"
-                         "navbar textblock textblock"
-                         "foot foot foot";
+        "navbar textblock textblock"
+        "foot foot foot";
 
     height: 100vh;
 }
 
+/* Top left grid area (GA) */
 #toolbar {
     grid-area: tool;
 }
 
+
+/* Top middle GA */
 #centerText {
     grid-area: centerText;
 }
 
+/* Top right GA */
 #rightHandTools {
     grid-area: tool2;
 }
 
+/* Middle-right GA */
 #mainText {
     grid-area: textblock;
 }
 
+/* Middle-left GA */
 nav {
     grid-area: navbar;
 
 }
 
+/* Bottom GA */
 footer {
     grid-area: foot;
 }
 
-#topSide, #bottomSide {
+#topSide,
+#bottomSide {
     padding-left: 20px;
 }
 
+
+/* Code to allow for different screen widths*/
 @media (max-width:1800px) {
     body {
-        grid-template-columns: 1fr 7fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
+        grid-template-columns: 1fr 7fr 2fr;
+        grid-template-rows: 1fr 8fr 0.5fr;
     }
 
 }
@@ -49,8 +59,8 @@ footer {
 
 @media (max-width:1200px) {
     body {
-        grid-template-columns: 1fr 6fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
+        grid-template-columns: 1fr 6fr 2fr;
+        grid-template-rows: 1fr 8fr 0.5fr;
     }
 
 }
@@ -58,17 +68,21 @@ footer {
 
 @media (max-width:800px) {
     body {
-        grid-template-columns: 1fr 5fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
+        grid-template-columns: 1fr 4fr 3fr;
+        grid-template-rows: 1fr 8fr 0.5fr;
     }
 
 }
 
 
-@media (max-width:400px) {
+@media (max-width:600px) {
     body {
-        grid-template-columns: 1fr 4fr 1fr;
-        grid-template-rows: 1fr 8fr 0.5fr;  
+        grid-template-columns: 1fr 4fr ;
+        grid-template-rows: 1fr 1fr 8fr 0.5fr;
+        grid-template-areas: "tool tool2"
+                             "centerText centerText"
+                             "navbar textblock"
+                             "foot foot";
     }
 
 }
