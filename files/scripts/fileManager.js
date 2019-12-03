@@ -50,11 +50,6 @@ function save() {
 
 //loads the Unnamed File
 
-function load() {
-    let element = document.getElementById("mainTextArea");
-    element.value = localStorage.getItem("Unnamed File");
-}
-
 //Loops through all the saveFiles in the local storage and cuts their names out to create a nav list on the side of the page
 
 function populateSideBar() {

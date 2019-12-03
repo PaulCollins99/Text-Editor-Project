@@ -8,7 +8,7 @@ let indentLog = [];
 
 //converts the mainTextArea into an array splitting at each new line
 
-function convertToArray (e) {
+function convertToArray () {
     let stringArray = document.getElementById("mainTextArea").value.split("\n");
     return stringArray;
 }
