@@ -2,7 +2,7 @@
 // Populates the open file select control with filenames found in local storage
 
 function populateOptions() {
-  for (let i = 0; i < localStorage.length; i++) {
+  for (let i = 0; i < localStorage.length; i += 1) {
     if (localStorage.key(i).substring(0, 9) === 'saveFile:') {
       const option = document.createElement('option');
       option.value = localStorage.key(i).substring(9);
@@ -16,14 +16,14 @@ function populateOptions() {
 
 function navigate() {
   const element = document.getElementById('openSelect');
-  location.href = 'editor.html';
+  window.location.href = 'editor.html';
   localStorage.setItem('load', element.value);
 }
 
 // Opens a completely new file and clears autoSave
 
 function newFile() {
-  location.href = 'editor.html';
+  window.location.href = 'editor.html';
   localStorage.setItem('load', 'Unnamed File');
 }
 
