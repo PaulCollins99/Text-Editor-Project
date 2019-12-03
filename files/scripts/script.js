@@ -133,7 +133,7 @@ function downloadToTxt() {
 function disableTab() {
   const element = document.getElementById('mainTextArea');
   // eslint-disable-next-line consistent-return
-  element.onkeydown = function (e) {
+  element.onkeydown = (e) => {
     if (e.keyCode === 9) {
       return false;
     }
@@ -151,9 +151,7 @@ function boot() {
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
   disableTab();
-  window.onbeforeunload = function () {
-    return true;
-  };
+  window.onbeforeunload = () => true;
 }
 
 window.addEventListener('load', boot);
