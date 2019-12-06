@@ -1,3 +1,5 @@
+(In progress)
+
 Current Features
 
 - Indent / Outdent (Hotkeys and buttons)
