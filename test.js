@@ -1,6 +1,7 @@
 'use strict';
 
+// eslint-disable-next-line no-undef
 QUnit.test('test', (assert) => {
-    let value = hello;
-    assert.equal(value, "hello", "excpecetd value is hello");
+  const value = 'hello';
+  assert.equal(value, 'hello', 'excpecetd value is hello');
 });
