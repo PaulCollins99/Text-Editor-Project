@@ -78,12 +78,18 @@ function populateSideBar() {
   }
 }
 
+//
+
+function keydownHandler() {
+  save();
+}
+
 // Code that allows the user to click on the items to load the corresponding pages
 
 
 function boot() {
+  window.mainTextArea.addEventListener('keydown', keydownHandler);
   window.saveAsButton.addEventListener('click', saveAs);
-  window.quickSave.addEventListener('click', save);
   window.addEventListener('unload', save);
   initialLoad();
   populateSideBar();

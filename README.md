@@ -11,5 +11,8 @@ Future Features
 
 - Add service worker to allow the user to download the app
 - Add postgreSQL database for storage
+- Add in QUnit testing to allow for easy future bug testing
 
 Problems that Occured
+
+- 
