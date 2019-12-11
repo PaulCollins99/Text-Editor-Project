@@ -147,6 +147,19 @@ function downloadToTxt() {
   document.body.removeChild(element);
 }
 
+function importFile() {
+  const element = document.getElementById('mainTextArea');
+  const fileToImport = document.getElementById('fileToImport');
+  const file = fileToImport.files[0];
+  const fileReader = new FileReader();
+
+  // eslint-disable-next-line func-names
+  fileReader.addEventListener('load', function () {
+    element.value = this.result;
+  });
+  fileReader.readAsText(file);
+}
+
 /**
  * Disables the standard function of the tab key when the mainTextArea is selected
  */
@@ -186,6 +199,7 @@ function displayCurrentLine() {
  * and add functionallity to allow the user to cancel an unload
  */
 function boot() {
+  window.importButton.addEventListener('click', importFile);
   window.mainTextArea.addEventListener('keydown', keydownHandler);
   window.left.addEventListener('click', outDent);
   window.right.addEventListener('click', addIndent);

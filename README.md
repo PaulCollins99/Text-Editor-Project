@@ -37,10 +37,8 @@ Problems that Occured / Known bugs
 
 Delete before upload
 
-- redo how the drop down works
-- make the drop down options move text in
-- add a service worker
-- add a way to save indentLog "fileName:"IndentLog
-- add previous version
-- explain how save files work
-- add import
+- redo how the drop down works (remove shit code from wed, make the drop down options move text in)
+- add a service worker (use hsww in github folder)
+- re write how filemanager works to include previeous version (current: previous: store arrays containing Filename, content, indentLog)
+- explain how save files work (write out in the readme how the filemanager system works)
+- add import (import text file)
