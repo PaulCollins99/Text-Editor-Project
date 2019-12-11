@@ -1,7 +1,8 @@
 'use strict';
 
-// function that runs when the page is first loaded
-
+/**
+ * function that runs when the page is first loaded
+ */
 function initialLoad() {
   const fileToLoad = localStorage.getItem('load');
   const element = document.getElementById('mainTextArea');
@@ -14,6 +15,9 @@ function initialLoad() {
   }
 }
 
+/**
+ * Save function that runs every 100ms and when certain events are triggered such as exit
+ */
 function save() {
   const element = document.getElementById('mainTextArea');
   if (localStorage.getItem('activeFile') !== 'Unnamed File') {
@@ -23,7 +27,9 @@ function save() {
   }
 }
 
-// Allows the user to save a file and give it a new name
+/**
+ * updates the text area with the content of the file you just clicked in the nav section
+ */
 function updateTextArea(e) {
   const oldElement = document.querySelector('.highlight');
 
@@ -38,6 +44,9 @@ function updateTextArea(e) {
   localStorage.setItem('activeFile', e.target.textContent);
 }
 
+/**
+ * Save as feature which also contains an if statement to stop overwriting
+ */
 function saveAs() {
   const element = document.getElementById('mainTextArea');
   const title = document.getElementById('saveAsName').value;
@@ -59,14 +68,10 @@ function saveAs() {
   localStorage.setItem('activeFile', title);
 }
 
-// Overwrites a save with the same name
-
-
-// loads the Unnamed File
-
-// Loops through all the saveFiles in the local storage and cuts their names
-// out to create a nav list on the side of the page
-
+/**
+ * Loops through all the saveFiles in the local storage and cuts their names
+ * out to create a nav list on the side of the page
+ */
 function populateSideBar() {
   for (let i = 0; i < localStorage.length; i += 1) {
     if (localStorage.key(i).substring(0, 9) === 'saveFile:') {
@@ -78,12 +83,10 @@ function populateSideBar() {
   }
 }
 
-//
-
-
-// Code that allows the user to click on the items to load the corresponding pages
-
-
+/**
+ * Boot function that is run when the load event is complete.
+ * Contains eventhandlers and timer for autosave
+ */
 function boot() {
   window.saveAsButton.addEventListener('click', saveAs);
   window.addEventListener('unload', save);
@@ -92,4 +95,5 @@ function boot() {
   setInterval(save, 100);
 }
 
+//
 window.addEventListener('load', boot);
