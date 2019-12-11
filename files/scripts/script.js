@@ -18,7 +18,7 @@ function getLineNumber() {
   return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split('\n').length;
 }
 
-// Moves the line the cursor is on up
+// Moves the line the cursor is on up.
 
 function moveLineUp() {
   const element = document.getElementById('mainTextArea');
@@ -98,7 +98,11 @@ function addIndent() {
   element.setSelectionRange(cursorPos, cursorPos);
 }
 
-// Handles all keyboard inputs
+
+/**
+ * Handles all keyboard inputs
+ * @param {*} e The keyboard event being passed in
+ */
 
 function keydownHandler(e) {
   if (e.shiftKey && e.key === 'Tab') {
