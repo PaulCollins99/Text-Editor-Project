@@ -21,9 +21,9 @@ body {
 /* Standard button design */
 
 button {
-	border: 1px solid var(--myMain);
+	border: 0.1em solid var(--myMain);
     border-radius: 15%;
-    margin: 2px;
+    margin: 0.2em;
 	width: 5em;
 	height: 2.5em;
     z-index: 86;

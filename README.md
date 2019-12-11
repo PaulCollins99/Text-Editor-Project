@@ -21,6 +21,8 @@ Current Features
 - Delete files (requires a refresh to update the nav bar)
 - Download file as .txt
 
+- Highlight and drag lines up (part of textarea by default)
+
 Future Features
 
 - Add service worker to allow the user to download the app

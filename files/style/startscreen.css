@@ -7,7 +7,7 @@ body {
     background-color: black;
 }
 img {
-    filter: blur(20px);
+    filter: blur(1.25em);
     height: 100%;
     width: 100%;
 }
@@ -17,11 +17,11 @@ section {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    height: 20%;
+    height: 30%;
     width: 20%;
     text-align: center;
     background-color: white;
-    border: solid 1px black;
+    border: solid 0.1em black;
 
 }
 
