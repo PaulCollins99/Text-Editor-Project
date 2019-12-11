@@ -48,4 +48,5 @@ new file system
 wrapperArray[0] = "Filename"
 wrapperArray[1] = "Text Content"
 wrapperArray[2] = "indentlog array"
-localStorage.setItem("Test2", JSON.stringify(wrapperArray))
+localStorage.setItem("current: previouse:", JSON.stringify(wrapperArray))
+let storedArray = JSON.parse(localStorage.getItem("Test2"))
