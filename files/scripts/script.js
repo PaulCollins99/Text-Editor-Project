@@ -162,6 +162,11 @@ function disableTab() {
   };
 }
 
+function displayCurrentLine() {
+  const element = document.getElementById('currentLine');
+  element.textContent = `Current Line: ${getLineNumber()}`;
+}
+
 /**
  * adds all event listeners, calls the function that disbales tab on the mainTextArea,
  * and add functionallity to allow the user to cancel an unload
@@ -173,6 +178,7 @@ function boot() {
   window.up.addEventListener('click', moveLineUp);
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
+  setInterval(displayCurrentLine, 100);
   disableTab();
 }
 
