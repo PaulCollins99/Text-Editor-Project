@@ -9,6 +9,7 @@ How to use
 - The buttons found in the top left hand corner of the screen do the same things as the hotkeys. They are there for devices without keyboards
 - To save a file under a name type a name in the text input and click save as. This will save the contents of the textarea to the local storage as    "saveFile:FileName"
 - The file can now be seen in the nav bar on the left hand sied of the editor 
+- To download a file simply click the download file button and it will download a txt file with the name you have saved it as
 
 Current Features
 
