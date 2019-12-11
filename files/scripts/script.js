@@ -174,7 +174,6 @@ function boot() {
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
   disableTab();
-  window.onbeforeunload = () => true;
 }
 
 // runs the boot function once the load event is complete

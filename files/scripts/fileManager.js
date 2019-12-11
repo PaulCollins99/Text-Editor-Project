@@ -7,8 +7,13 @@ function initialLoad() {
   const fileToLoad = localStorage.getItem('load');
   const element = document.getElementById('mainTextArea');
   if (fileToLoad !== '') {
-    element.value = localStorage.getItem(`saveFile:${fileToLoad}`);
-    localStorage.setItem('activeFile', fileToLoad);
+    if (fileToLoad === 'Unnamed File') {
+      element.value = localStorage.getItem('Unnamed File');
+      localStorage.setItem('activeFile', 'Unnamed File');
+    } else {
+      element.value = localStorage.getItem(`saveFile:${fileToLoad}`);
+      localStorage.setItem('activeFile', fileToLoad);
+    }
   } else {
     element.value = localStorage.getItem('Unnamed File');
     localStorage.setItem('activeFile', 'Unnamed File');
@@ -40,8 +45,13 @@ function updateTextArea(e) {
   save();
   e.target.classList.add('highlight');
   const element = document.getElementById('mainTextArea');
-  element.value = localStorage.getItem(`saveFile:${e.target.textContent}`);
-  localStorage.setItem('activeFile', e.target.textContent);
+  if (e.target.textContent === 'Unnamed File') {
+    element.value = localStorage.getItem(e.target.textContent);
+    localStorage.setItem('activeFile', e.target.textContent);
+  } else {
+    element.value = localStorage.getItem(`saveFile:${e.target.textContent}`);
+    localStorage.setItem('activeFile', e.target.textContent);
+  }
 }
 
 /**
@@ -84,15 +94,39 @@ function populateSideBar() {
 }
 
 /**
+ * autoSave Function. This is put in a seperate function as i need to call a timeout on
+ * it or it will overwrite before the autosave can load
+ */
+function autoSave() {
+  setInterval(save, 100);
+}
+
+/**
+ * Function to allow the user to delete the current active file
+ */
+function deleteSave() {
+  if (localStorage.getItem('activeFile') === 'Unnamed File') {
+    localStorage.removeItem(localStorage.getItem('activeFile'));
+  } else {
+    localStorage.removeItem(`saveFile:${localStorage.getItem('activeFile')}`);
+  }
+  const element = document.getElementById('mainTextArea');
+  element.value = '';
+}
+
+/**
  * Boot function that is run when the load event is complete.
  * Contains eventhandlers and timer for autosave
  */
 function boot() {
   window.saveAsButton.addEventListener('click', saveAs);
   window.addEventListener('unload', save);
-  initialLoad();
+  window.Unnamed_File.addEventListener('click', updateTextArea);
+  window.deleteSaveButton.addEventListener('click', deleteSave);
   populateSideBar();
-  setInterval(save, 100);
+  initialLoad();
+  setTimeout(autoSave, 5000);
+  window.onbeforeunload = () => true;
 }
 
 //
