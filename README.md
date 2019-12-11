@@ -31,5 +31,16 @@ Future Features
 
 Problems that Occured / Known bugs
 
-- Attempted to add QUnit test however I was unable to spend the time to learn how to create proper testing.
+- Attempted to add QUnit test however I was unable to get these to work effectivly.
 - Indent Level is not saved so only works at the time of writing and not after a refresh
+
+
+Delete before upload
+
+- redo how the drop down works
+- make the drop down options move text in
+- add a service worker
+- add a way to save indentLog "fileName:"IndentLog
+- add previous version
+- explain how save files work
+- add import
