@@ -162,9 +162,20 @@ function disableTab() {
   };
 }
 
+function updateSelect() {
+  const element = document.getElementById('myList');
+  const currentLine = getLineNumber();
+  element.value = indentLog[currentLine];
+}
+
 function displayCurrentLine() {
   const element = document.getElementById('currentLine');
   element.textContent = `Current Line: ${getLineNumber()}`;
+}
+
+function generateIndentLog() {
+  let stringArray = convertToArray();
+  
 }
 
 /**
@@ -179,6 +190,7 @@ function boot() {
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
   setInterval(displayCurrentLine, 100);
+  setInterval(updateSelect, 100);
   disableTab();
 }
 

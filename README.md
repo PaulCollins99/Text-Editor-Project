@@ -17,6 +17,7 @@ Current Features
 - Move line up and down (Hotkeys and buttons)
 - Save File to local storage
 - Open files through easy to use nav bar
+- Delete files (requires a refresh to update the nav bar)
 - Download file as txt
 
 Future Features

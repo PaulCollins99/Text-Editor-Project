@@ -98,20 +98,23 @@ function populateSideBar() {
  * it or it will overwrite before the autosave can load
  */
 function autoSave() {
-  setInterval(save, 100);
+  setInterval(save, 5000);
 }
 
 /**
  * Function to allow the user to delete the current active file
  */
 function deleteSave() {
+  const element = document.getElementById('mainTextArea');
   if (localStorage.getItem('activeFile') === 'Unnamed File') {
     localStorage.removeItem(localStorage.getItem('activeFile'));
+    element.value = localStorage.getItem('Unnamed File');
+    localStorage.setItem('activeFile', 'Unnamed File');
   } else {
     localStorage.removeItem(`saveFile:${localStorage.getItem('activeFile')}`);
+    element.value = localStorage.getItem('Unnamed File');
+    localStorage.setItem('activeFile', 'Unnamed File');
   }
-  const element = document.getElementById('mainTextArea');
-  element.value = '';
 }
 
 /**
