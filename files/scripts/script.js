@@ -98,18 +98,19 @@ function addIndent() {
   const lineNumber = getLineNumber();
   const stringArray = convertToArray(element);
   const cursorPos = element.selectionStart + 1;
+  if (indentLog[lineNumber - 1] < 5) {
+    element.value = '';
+    stringArray[lineNumber - 1] = `\t${stringArray[lineNumber - 1]}`;
+    element.value = stringArray.join('\n');
+    if (typeof indentLog[lineNumber] === 'undefined') {
+      indentLog[lineNumber] = 1;
+    } else {
+      indentLog[lineNumber] += 1;
+    }
 
-  element.value = '';
-  stringArray[lineNumber - 1] = `\t${stringArray[lineNumber - 1]}`;
-  element.value = stringArray.join('\n');
-  if (typeof indentLog[lineNumber] === 'undefined') {
-    indentLog[lineNumber] = 1;
-  } else {
-    indentLog[lineNumber] += 1;
+    element.focus();
+    element.setSelectionRange(cursorPos, cursorPos);
   }
-
-  element.focus();
-  element.setSelectionRange(cursorPos, cursorPos);
 }
 
 
@@ -123,9 +124,6 @@ function keydownHandler(e) {
     outDent();
   } else if (!e.shiftKey && e.key === 'Tab') {
     addIndent();
-  }
-  if (e.key === 'Enter') {
-    // add bullet points in here addBullet();
   }
   if (e.ctrlKey && e.key === 'ArrowUp') {
     moveLineUp();
@@ -162,7 +160,16 @@ function disableTab() {
   };
 }
 
+function generateIndentLog() {
+  const stringArray = convertToArray();
+  for (let i = 0; i < stringArray.length; i += 1) {
+    const tabCount = stringArray[i].replace(/[^\t]/g, '').length;
+    indentLog[i] = tabCount;
+  }
+}
+
 function updateSelect() {
+  generateIndentLog();
   const element = document.getElementById('myList');
   const currentLine = getLineNumber();
   element.value = indentLog[currentLine];
@@ -173,10 +180,6 @@ function displayCurrentLine() {
   element.textContent = `Current Line: ${getLineNumber()}`;
 }
 
-function generateIndentLog() {
-  let stringArray = convertToArray();
-  
-}
 
 /**
  * adds all event listeners, calls the function that disbales tab on the mainTextArea,

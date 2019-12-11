@@ -2,7 +2,7 @@
 How to use
 
 - Run NPM Start on the directory
-    - The package has the prestart command of NPM install so it will automatically 
+    - The package has the prestart command of NPM install so it will install all dependences automatically 
 - Go to relevant IP and it will load into the splash screen
 - On first run, click new file and this will take you into the editor
 - The hotkeys can be found in both the splash screen and in the editor
@@ -14,7 +14,7 @@ How to use
 
 Current Features
 
-- Indent / Outdent (Hotkeys and buttons)
+- Indent - up to 5 indentations / Outdent (Hotkeys and buttons)
 - Move line up and down (Hotkeys and buttons)
 - Save File to local storage
 - Open files through easy to use nav bar
@@ -27,6 +27,7 @@ Future Features
 - Add postgreSQL database for storage
 - Add in QUnit testing to allow for easy future bug testing
 
-Problems that Occured
+Problems that Occured / Known bugs
 
 - Attempted to add QUnit test however I was unable to spend the time to learn how to create proper testing.
+- Indent Level is not saved so only works at the time of writing and not after a refresh
