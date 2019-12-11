@@ -41,3 +41,11 @@ Delete before upload
 - explain how save files work (write out in the readme how the filemanager system works)
 - redo how the drop down works (remove shit code from wed, make the drop down options move text in)
 - add a service worker (use hsww in github folder)
+
+
+new file system
+
+wrapperArray[0] = "Filename"
+wrapperArray[1] = "Text Content"
+wrapperArray[2] = "indentlog array"
+localStorage.setItem("Test2", JSON.stringify(wrapperArray))
