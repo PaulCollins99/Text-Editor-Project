@@ -5,20 +5,28 @@
 
 const indentLog = [];
 
-// converts the mainTextArea into an array splitting at each new line
+
+/**
+ *  converts the mainTextArea into an array splitting at each new line
+ */
 
 function convertToArray() {
   const stringArray = document.getElementById('mainTextArea').value.split('\n');
   return stringArray;
 }
 
-// gets current line number for cursor
 
+/**
+ * gets current line number for cursor
+ */
 function getLineNumber() {
   return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split('\n').length;
 }
 
-// Moves the line the cursor is on up.
+
+/**
+ * Moves the line the cursor is on up.
+ */
 
 function moveLineUp() {
   const element = document.getElementById('mainTextArea');
@@ -27,6 +35,8 @@ function moveLineUp() {
   const cursorPos = element.selectionStart;
 
   const temp = stringArray[lineNumber - 1];
+
+  // if statement to stop lines from attemtping to go -
 
   if (lineNumber - 1 !== 0) {
     stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
@@ -40,8 +50,9 @@ function moveLineUp() {
   element.setSelectionRange(cursorPos, cursorPos);
 }
 
-// Moves the line the cursor is on down
-
+/**
+ * Moves the line the cursor is on down.
+ */
 function moveLineDown() {
   const element = document.getElementById('mainTextArea');
   const lineNumber = getLineNumber();
@@ -58,8 +69,10 @@ function moveLineDown() {
   element.setSelectionRange(cursorPos, cursorPos);
 }
 
-// Removes one tab indent on the current line
 
+/**
+ * Removes one tab indent on the current line
+ */
 function outDent() {
   const element = document.getElementById('mainTextArea');
   const lineNumber = getLineNumber();
@@ -77,8 +90,9 @@ function outDent() {
   element.setSelectionRange(cursorPos - 1, cursorPos - 1);
 }
 
-// Adds one tab indent on the current line
-
+/**
+ * Adds one tab indent on the current line
+ */
 function addIndent() {
   const element = document.getElementById('mainTextArea');
   const lineNumber = getLineNumber();
@@ -120,9 +134,9 @@ function keydownHandler(e) {
   }
 }
 
-
-// A function that allows the user to download their note as a text document.
-
+/**
+ * A function that allows the user to download their note as a text document.
+ */
 function downloadToTxt() {
   const value = document.getElementById('mainTextArea').value.replace(/\n/g, '\r\n');
   const blob = new Blob([value], { type: 'text/plain' });
@@ -135,8 +149,9 @@ function downloadToTxt() {
   document.body.removeChild(element);
 }
 
-// Disables the standard function of the tab key when the mainTextArea is selected
-
+/**
+ * Disables the standard function of the tab key when the mainTextArea is selected
+ */
 function disableTab() {
   const element = document.getElementById('mainTextArea');
   // eslint-disable-next-line consistent-return
@@ -147,9 +162,10 @@ function disableTab() {
   };
 }
 
-// adds all event listeners, calls the function that disbales tab on the mainTextArea,
-// and add functionallity to allow the user to cancel an unload
-
+/**
+ * adds all event listeners, calls the function that disbales tab on the mainTextArea,
+ * and add functionallity to allow the user to cancel an unload
+ */
 function boot() {
   window.mainTextArea.addEventListener('keydown', keydownHandler);
   window.left.addEventListener('click', outDent);
@@ -161,4 +177,5 @@ function boot() {
   window.onbeforeunload = () => true;
 }
 
+// runs the boot function once the load event is complete
 window.addEventListener('load', boot);
