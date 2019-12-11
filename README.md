@@ -8,7 +8,8 @@ How to use
 - The hotkeys can be found in both the splash screen and in the editor
 - The buttons found in the top left hand corner of the screen do the same things as the hotkeys. They are there for devices without keyboards
 - To save a file under a name type a name in the text input and click save as. This will save the contents of the textarea to the local storage as    "saveFile:FileName"
-- The file can now be seen in the nav bar on the left hand sied of the editor 
+- The file can now be seen in the nav bar on the left hand sied of the editor. You can open any file from this nav bar
+- To delete a file, open the file in question, click the delete button and then refresh the page
 - To download a file simply click the download file button and it will download a txt file with the name you have saved it as
 
 Current Features
@@ -18,7 +19,7 @@ Current Features
 - Save File to local storage
 - Open files through easy to use nav bar
 - Delete files (requires a refresh to update the nav bar)
-- Download file as txt
+- Download file as .txt
 
 Future Features
 
