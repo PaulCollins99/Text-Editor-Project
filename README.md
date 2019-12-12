@@ -11,6 +11,9 @@ How to use
 - The file can now be seen in the nav bar on the left hand sied of the editor. You can open any file from this nav bar
 - To delete a file, open the file in question, click the delete button and then refresh the page
 - To download a file simply click the download file button and it will download a txt file with the name you have saved it as
+- To import a file click Choose File, select the desired file and then click the import button
+
+The javascript for the editor is found in one file as i ran into errors seperating it. To make it easier to read i seperated each key section with ###. I have also added JS comments to each function.
 
 Current Features
 
@@ -37,14 +40,10 @@ Future Features
 Problems that Occured / Known bugs
 
 - Attempted to add QUnit test however I was unable to get these to work effectivly.
-- Indent Level is not saved so only works at the time of writing and not after a refresh
-
+- You can backspace to get rid of indentation and it wont change the indentation log
 
 Delete before upload
 
-- done - re write how filemanager works to include previeous version (current: previous: store arrays containing Filename, content, indentLog)
-- done - explain how save files work (write out in the readme how the filemanager system works)
-- done - redo how the drop down works (remove shit code from wed, make the drop down options move text in)
 - add postgres database
 - add a service worker (use hsww in github folder)
 
