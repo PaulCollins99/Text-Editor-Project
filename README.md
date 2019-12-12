@@ -47,13 +47,4 @@ Delete before upload
 - redo how the drop down works (remove shit code from wed, make the drop down options move text in)
 - add a service worker (use hsww in github folder)
 
-
-new file system
-
-wrapperArray[0] = "Filename"
-wrapperArray[1] = "Text Content"
-wrapperArray[2] = "indentlog array"
-localStorage.setItem("current: previouse:", JSON.stringify(wrapperArray))
-let storedArray = JSON.parse(localStorage.getItem("Test2"))
-
 fix initialLoad
