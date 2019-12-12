@@ -45,4 +45,4 @@ Delete before upload
 
 - add postgres database
 - add a service worker (use hsww in github folder)
-
+- add css on that nav bar
