@@ -20,8 +20,13 @@ Current Features
 - Open files through easy to use nav bar
 - Delete files (requires a refresh to update the nav bar)
 - Download file as .txt
+- Import a .txt file
 
 - Highlight and drag lines up (part of textarea by default)
+
+How the saving works.
+
+The app saves to the local storage of the web-browser. It saves a mixture of arrays that use JSON(stringify and parse). The name of the file, the content of the text area and the levels of indenting for each line are saved. When the file is opened it re construct the arrays and assigns the relevant data where its needed.
 
 Future Features
 
@@ -37,7 +42,7 @@ Problems that Occured / Known bugs
 
 Delete before upload
 
-- re write how filemanager works to include previeous version (current: previous: store arrays containing Filename, content, indentLog)
+- done - re write how filemanager works to include previeous version (current: previous: store arrays containing Filename, content, indentLog)
 - explain how save files work (write out in the readme how the filemanager system works)
 - redo how the drop down works (remove shit code from wed, make the drop down options move text in)
 - add a service worker (use hsww in github folder)
