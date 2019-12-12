@@ -3,9 +3,130 @@
 // JavaScript for the main editor
 // An array that is used to track the level of indentation
 
-const indentLog = [];
+let indentLog = [];
+
+/**
+ * function that runs when the page is first loaded
+ */
+function initialLoad() {
+  const fileToLoad = localStorage.getItem('load');
+  const element = document.getElementById('mainTextArea');
+  if (fileToLoad !== '') {
+    if (fileToLoad === 'Unnamed File') {
+      if (localStorage.getItem('Unnamed File') !== null) {
+        const array = JSON.parse(localStorage.getItem('Unnamed File'));
+        // eslint-disable-next-line prefer-destructuring
+        element.value = array[1];
+        indentLog = JSON.parse(array[2]);
+      }
+      localStorage.setItem('activeFile', 'Unnamed File');
+    } else {
+      const array = JSON.parse(localStorage.getItem(`saveFile:${fileToLoad}`));
+      // eslint-disable-next-line prefer-destructuring
+      element.value = array[1];
+      indentLog = JSON.parse(array[2]);
+      localStorage.setItem('activeFile', fileToLoad);
+    }
+  } else {
+    element.value = localStorage.getItem('Unnamed File');
+    localStorage.setItem('activeFile', 'Unnamed File');
+  }
+}
+
+function saveFile() {
+  const wrapperArray = [];
+  const title = localStorage.getItem('activeFile');
+  const element = document.getElementById('mainTextArea');
+  const content = element.value;
+  wrapperArray[0] = title;
+  wrapperArray[1] = content;
+  wrapperArray[2] = JSON.stringify(indentLog);
+  if (localStorage.getItem('activeFile') !== 'Unnamed File') {
+    localStorage.setItem(`saveFile:${localStorage.getItem('activeFile')}`, JSON.stringify(wrapperArray));
+  } else {
+    localStorage.setItem('Unnamed File', JSON.stringify(wrapperArray));
+  }
+}
+
+function updateTextArea(e) {
+  const oldElement = document.querySelector('.highlight');
+
+  if (oldElement != null) {
+    oldElement.classList.remove('highlight');
+  }
+
+  saveFile();
+  e.target.classList.add('highlight');
+  const element = document.getElementById('mainTextArea');
+  if (e.target.textContent === 'Unnamed File') {
+    const savedData = localStorage.getItem(e.target.textContent);
+    const wrapperArray = JSON.parse(savedData);
+    indentLog = JSON.parse(wrapperArray[2]);
+    // eslint-disable-next-line prefer-destructuring
+    element.value = wrapperArray[1];
+    localStorage.setItem('activeFile', e.target.textContent);
+  } else {
+    const savedData = localStorage.getItem(`saveFile:${e.target.textContent}`);
+    const wrapperArray = JSON.parse(savedData);
+    indentLog = JSON.parse(wrapperArray[2]);
+    // eslint-disable-next-line prefer-destructuring
+    element.value = wrapperArray[1];
+    localStorage.setItem('activeFile', e.target.textContent);
+  }
+}
 
 
+function populateSideBar() {
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i).substring(0, 9) === 'saveFile:') {
+      const tab = document.createElement('li');
+      tab.textContent = localStorage.key(i).substring(9);
+      tab.addEventListener('click', updateTextArea);
+      document.getElementById('fileBar').appendChild(tab);
+    }
+  }
+}
+
+function saveAs() {
+  const element = document.getElementById('mainTextArea');
+  const title = document.getElementById('saveAsName').value;
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i).substring(9) === title) {
+      // eslint-disable-next-line no-alert
+      alert('Please use a different title, to overwrite you current file press quick save');
+      return;
+    }
+  }
+  const wrapperArray = [];
+  wrapperArray[0] = title;
+  wrapperArray[1] = element.value;
+  wrapperArray[2] = JSON.stringify(indentLog);
+  localStorage.setItem(`saveFile:${title}`, JSON.stringify(wrapperArray));
+
+  const tab = document.createElement('li');
+  tab.textContent = title;
+  tab.value = title;
+  tab.addEventListener('click', updateTextArea);
+  document.getElementById('fileBar').appendChild(tab);
+
+  localStorage.setItem('activeFile', title);
+}
+
+/**
+ * Function to allow the user to delete the current active file
+ */
+function deleteSave() {
+  const element = document.getElementById('mainTextArea');
+  if (localStorage.getItem('activeFile') === 'Unnamed File') {
+    element.value = '';
+  } else {
+    localStorage.removeItem(`saveFile:${localStorage.getItem('activeFile')}`);
+    const array = JSON.parse(localStorage.getItem('Unnamed File'));
+    // eslint-disable-next-line prefer-destructuring
+    element.value = array[1];
+    localStorage.setItem('activeFile', 'Unnamed File');
+  }
+}
 /**
  *  converts the mainTextArea into an array splitting at each new line
  */
@@ -98,15 +219,15 @@ function addIndent() {
   const lineNumber = getLineNumber();
   const stringArray = convertToArray(element);
   const cursorPos = element.selectionStart + 1;
-  if (indentLog[lineNumber - 1] < 5) {
+  if (typeof indentLog[lineNumber] === 'undefined') {
+    indentLog[lineNumber] = 1;
+  }
+
+  if (indentLog[lineNumber] < 5) {
     element.value = '';
     stringArray[lineNumber - 1] = `\t${stringArray[lineNumber - 1]}`;
     element.value = stringArray.join('\n');
-    if (typeof indentLog[lineNumber] === 'undefined') {
-      indentLog[lineNumber] = 1;
-    } else {
-      indentLog[lineNumber] += 1;
-    }
+    indentLog[lineNumber] += 1;
 
     element.focus();
     element.setSelectionRange(cursorPos, cursorPos);
@@ -130,6 +251,8 @@ function keydownHandler(e) {
   } else if (e.ctrlKey && e.key === 'ArrowDown') {
     moveLineDown();
   }
+
+  saveFile();
 }
 
 /**
@@ -206,9 +329,12 @@ function boot() {
   window.up.addEventListener('click', moveLineUp);
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
-  setInterval(displayCurrentLine, 100);
-  setInterval(updateSelect, 100);
+  window.saveAsButton.addEventListener('click', saveAs);
+  window.Unnamed_File.addEventListener('click', updateTextArea);
+  window.deleteSaveButton.addEventListener('click', deleteSave);
+  populateSideBar();
   disableTab();
+  initialLoad();
 }
 
 // runs the boot function once the load event is complete

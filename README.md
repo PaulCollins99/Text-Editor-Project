@@ -50,3 +50,5 @@ wrapperArray[1] = "Text Content"
 wrapperArray[2] = "indentlog array"
 localStorage.setItem("current: previouse:", JSON.stringify(wrapperArray))
 let storedArray = JSON.parse(localStorage.getItem("Test2"))
+
+fix initialLoad
