@@ -3,8 +3,148 @@
 // JavaScript for the main editor
 // An array that is used to track the level of indentation
 
-const indentLog = [];
+let indentLog = [];
 
+// ################## File management functions #################
+
+/**
+ * function that runs when the page is first loaded
+ */
+function initialLoad() {
+  const fileToLoad = localStorage.getItem('activeFile');
+  const element = document.getElementById('mainTextArea');
+  if (fileToLoad !== '') {
+    if (fileToLoad === 'Unnamed File') {
+      if (localStorage.getItem('Unnamed File') !== null) {
+        const array = JSON.parse(localStorage.getItem('Unnamed File'));
+        // eslint-disable-next-line prefer-destructuring
+        element.value = array[1];
+        indentLog = JSON.parse(array[2]);
+      }
+      localStorage.setItem('activeFile', 'Unnamed File');
+    } else {
+      const array = JSON.parse(localStorage.getItem(`saveFile:${fileToLoad}`));
+      // eslint-disable-next-line prefer-destructuring
+      element.value = array[1];
+      indentLog = JSON.parse(array[2]);
+      localStorage.setItem('activeFile', fileToLoad);
+    }
+  }
+}
+
+/**
+ * Save function that runs every 100ms and when certain events are triggered such as exit
+ */
+
+function saveFile() {
+  const wrapperArray = [];
+  const title = localStorage.getItem('activeFile');
+  const element = document.getElementById('mainTextArea');
+  const content = element.value;
+  wrapperArray[0] = title;
+  wrapperArray[1] = content;
+  wrapperArray[2] = JSON.stringify(indentLog);
+  if (localStorage.getItem('activeFile') !== 'Unnamed File') {
+    localStorage.setItem(`saveFile:${localStorage.getItem('activeFile')}`, JSON.stringify(wrapperArray));
+  } else {
+    localStorage.setItem('Unnamed File', JSON.stringify(wrapperArray));
+  }
+}
+
+/**
+ * updates the text area with the content of the file you just clicked in the nav section
+ */
+
+function updateTextArea(e) {
+  const oldElement = document.querySelector('.highlight');
+
+  if (oldElement != null) {
+    oldElement.classList.remove('highlight');
+  }
+
+  saveFile();
+  e.target.classList.add('highlight');
+  const element = document.getElementById('mainTextArea');
+  if (e.target.textContent === 'Unnamed File') {
+    const savedData = localStorage.getItem(e.target.textContent);
+    const wrapperArray = JSON.parse(savedData);
+    indentLog = JSON.parse(wrapperArray[2]);
+    // eslint-disable-next-line prefer-destructuring
+    element.value = wrapperArray[1];
+    localStorage.setItem('activeFile', e.target.textContent);
+  } else {
+    const savedData = localStorage.getItem(`saveFile:${e.target.textContent}`);
+    const wrapperArray = JSON.parse(savedData);
+    indentLog = JSON.parse(wrapperArray[2]);
+    // eslint-disable-next-line prefer-destructuring
+    element.value = wrapperArray[1];
+    localStorage.setItem('activeFile', e.target.textContent);
+  }
+}
+
+/**
+ * Loops through all the saveFiles in the local storage and cuts their names
+ * out to create a nav list on the side of the page
+ */
+
+function populateSideBar() {
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i).substring(0, 9) === 'saveFile:') {
+      const tab = document.createElement('li');
+      tab.textContent = localStorage.key(i).substring(9);
+      tab.addEventListener('click', updateTextArea);
+      document.getElementById('fileBar').appendChild(tab);
+    }
+  }
+}
+
+/**
+ * Save as feature which also contains an if statement to stop overwriting
+ */
+
+function saveAs() {
+  const element = document.getElementById('mainTextArea');
+  const title = document.getElementById('saveAsName').value;
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i).substring(9) === title) {
+      // eslint-disable-next-line no-alert
+      alert('Please use a different title, to overwrite you current file press quick save');
+      return;
+    }
+  }
+  const wrapperArray = [];
+  wrapperArray[0] = title;
+  wrapperArray[1] = element.value;
+  wrapperArray[2] = JSON.stringify(indentLog);
+  localStorage.setItem(`saveFile:${title}`, JSON.stringify(wrapperArray));
+
+  const tab = document.createElement('li');
+  tab.textContent = title;
+  tab.value = title;
+  tab.addEventListener('click', updateTextArea);
+  document.getElementById('fileBar').appendChild(tab);
+
+  localStorage.setItem('activeFile', title);
+}
+
+/**
+ * Function to allow the user to delete the current active file
+ */
+function deleteSave() {
+  const element = document.getElementById('mainTextArea');
+  if (localStorage.getItem('activeFile') === 'Unnamed File') {
+    element.value = '';
+    indentLog = [];
+  } else {
+    localStorage.removeItem(`saveFile:${localStorage.getItem('activeFile')}`);
+    const array = JSON.parse(localStorage.getItem('Unnamed File'));
+    // eslint-disable-next-line prefer-destructuring
+    element.value = array[1];
+    localStorage.setItem('activeFile', 'Unnamed File');
+  }
+}
+
+// ################## Textarea functions ###################
 
 /**
  *  converts the mainTextArea into an array splitting at each new line
@@ -33,7 +173,7 @@ function moveLineUp() {
   const lineNumber = getLineNumber();
   const stringArray = convertToArray(element);
   const cursorPos = element.selectionStart;
-
+  const tempIndentLog = indentLog[lineNumber];
   const temp = stringArray[lineNumber - 1];
 
   // if statement to stop lines from attemtping to go -
@@ -41,6 +181,8 @@ function moveLineUp() {
   if (lineNumber - 1 !== 0) {
     stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
     stringArray[lineNumber - 2] = temp;
+    indentLog[lineNumber] = indentLog[lineNumber - 1];
+    indentLog[lineNumber - 1] = tempIndentLog;
   }
 
   element.value = '';
@@ -59,16 +201,19 @@ function moveLineDown() {
   const stringArray = convertToArray(element);
   const cursorPos = element.selectionStart;
   const temp = stringArray[lineNumber - 1];
+  const tempIndentLog = indentLog[lineNumber];
 
   stringArray[lineNumber - 1] = stringArray[lineNumber];
   stringArray[lineNumber] = temp;
+  indentLog[lineNumber] = indentLog[lineNumber + 1];
+  indentLog[lineNumber + 1] = tempIndentLog;
+
   element.value = '';
   element.value = stringArray.join('\n');
 
   element.focus();
   element.setSelectionRange(cursorPos, cursorPos);
 }
-
 
 /**
  * Removes one tab indent on the current line
@@ -88,6 +233,7 @@ function outDent() {
 
   element.focus();
   element.setSelectionRange(cursorPos - 1, cursorPos - 1);
+  saveFile();
 }
 
 /**
@@ -98,18 +244,33 @@ function addIndent() {
   const lineNumber = getLineNumber();
   const stringArray = convertToArray(element);
   const cursorPos = element.selectionStart + 1;
-  if (indentLog[lineNumber - 1] < 5) {
+  if (typeof indentLog[lineNumber] === 'undefined') {
+    indentLog[lineNumber] = 1;
+  }
+
+  if (indentLog[lineNumber] < 6) {
     element.value = '';
     stringArray[lineNumber - 1] = `\t${stringArray[lineNumber - 1]}`;
     element.value = stringArray.join('\n');
-    if (typeof indentLog[lineNumber] === 'undefined') {
-      indentLog[lineNumber] = 1;
-    } else {
-      indentLog[lineNumber] += 1;
-    }
+    indentLog[lineNumber] += 1;
 
     element.focus();
     element.setSelectionRange(cursorPos, cursorPos);
+    saveFile();
+  }
+}
+
+// ################## Misc functions ###################
+
+function displayCurrentLine() {
+  const element = document.getElementById('currentLine');
+  element.textContent = `Current Line: ${getLineNumber()}`;
+
+  const element2 = document.getElementById('currentIndent');
+  if (indentLog[getLineNumber()] === undefined) {
+    element2.textContent = 'Current indent level: 1';
+  } else {
+    element2.textContent = `Current indent level: ${indentLog[getLineNumber()]}`;
   }
 }
 
@@ -130,6 +291,8 @@ function keydownHandler(e) {
   } else if (e.ctrlKey && e.key === 'ArrowDown') {
     moveLineDown();
   }
+
+  saveFile();
 }
 
 /**
@@ -173,27 +336,6 @@ function disableTab() {
   };
 }
 
-// function generateIndentLog() {
-// const stringArray = convertToArray();
-//  for (let i = 0; i < stringArray.length; i += 1) {
-//    const tabCount = stringArray[i].replace(/[^\t]/g, '').length;
-//    indentLog[i] = tabCount;
-//  }
-// }
-//
-// function updateSelect() {
-//  generateIndentLog();
-//  const element = document.getElementById('myList');
-//  const currentLine = getLineNumber();
-//  element.value = indentLog[currentLine];
-// }
-//
-// function displayCurrentLine() {
-//  const element = document.getElementById('currentLine');
-//  element.textContent = `Current Line: ${getLineNumber()}`;
-// }
-
-
 /**
  * adds all event listeners, calls the function that disbales tab on the mainTextArea,
  * and add functionallity to allow the user to cancel an unload
@@ -206,9 +348,13 @@ function boot() {
   window.up.addEventListener('click', moveLineUp);
   window.down.addEventListener('click', moveLineDown);
   window.download.addEventListener('click', downloadToTxt);
-  setInterval(displayCurrentLine, 100);
-  setInterval(updateSelect, 100);
+  window.saveAsButton.addEventListener('click', saveAs);
+  window.Unnamed_File.addEventListener('click', updateTextArea);
+  window.deleteSaveButton.addEventListener('click', deleteSave);
+  populateSideBar();
   disableTab();
+  initialLoad();
+  setInterval(displayCurrentLine, 100);
 }
 
 // runs the boot function once the load event is complete

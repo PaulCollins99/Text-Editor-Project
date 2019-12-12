@@ -22,7 +22,7 @@ function populateOptions() {
 function navigate() {
   const element = document.getElementById('openSelect');
   window.location.href = 'editor.html';
-  localStorage.setItem('load', element.value);
+  localStorage.setItem('activeFile', element.value);
 }
 
 /**
@@ -30,7 +30,8 @@ function navigate() {
  */
 function newFile() {
   window.location.href = 'editor.html';
-  localStorage.setItem('load', 'Unnamed File');
+  localStorage.setItem('activeFile', 'Unnamed File');
+  localStorage.removeItem('Unnamed File');
 }
 
 /**

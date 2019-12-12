@@ -43,8 +43,8 @@ Problems that Occured / Known bugs
 Delete before upload
 
 - done - re write how filemanager works to include previeous version (current: previous: store arrays containing Filename, content, indentLog)
-- explain how save files work (write out in the readme how the filemanager system works)
-- redo how the drop down works (remove shit code from wed, make the drop down options move text in)
+- done - explain how save files work (write out in the readme how the filemanager system works)
+- done - redo how the drop down works (remove shit code from wed, make the drop down options move text in)
+- add postgres database
 - add a service worker (use hsww in github folder)
 
-fix initialLoad
