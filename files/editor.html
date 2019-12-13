@@ -51,7 +51,7 @@
     </section>
 
     <main id="mainText">
-        <textarea id="mainTextArea"></textarea>
+        <textarea id="mainTextArea">⦿</textarea>
     </main>
     <!-- Nav bar found on the left of the screen-->
     <nav id="navigation">
@@ -64,6 +64,13 @@
         <p>Paul Collins - UP895823</p>
     </footer>
 
+    <script>
+            if('serviceWorker' in navigator) {
+              navigator.serviceWorker
+                       .register('./files/sw.js')
+                       .then(function() { console.log("Service Worker Registered"); });
+            }
+            </script>
 </body>
 
 </html>

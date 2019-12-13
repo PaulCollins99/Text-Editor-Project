@@ -24,6 +24,7 @@ function initialLoad() {
         indentLog = JSON.parse(array[2]);
       }
       localStorage.setItem('activeFile', 'Unnamed File');
+      element.value = '⦿';
     } else {
       const array = JSON.parse(localStorage.getItem(`saveFile:${fileToLoad}`));
       // eslint-disable-next-line prefer-destructuring
@@ -115,26 +116,28 @@ function populateSideBar() {
 function saveAs() {
   const element = document.getElementById('mainTextArea');
   const title = document.getElementById('saveAsName').value;
-  for (let i = 0; i < localStorage.length; i += 1) {
-    if (localStorage.key(i).substring(9) === title) {
+  if (title !== '') {
+    for (let i = 0; i < localStorage.length; i += 1) {
+      if (localStorage.key(i).substring(9) === title) {
       // eslint-disable-next-line no-alert
-      alert('Please use a different title, to overwrite you current file press quick save');
-      return;
+        alert('Please use a different title, to overwrite you current file press quick save');
+        return;
+      }
     }
+    const wrapperArray = [];
+    wrapperArray[0] = title;
+    wrapperArray[1] = element.value;
+    wrapperArray[2] = JSON.stringify(indentLog);
+    localStorage.setItem(`saveFile:${title}`, JSON.stringify(wrapperArray));
+
+    const tab = document.createElement('li');
+    tab.textContent = title;
+    tab.value = title;
+    tab.addEventListener('click', updateTextArea);
+    document.getElementById('fileBar').appendChild(tab);
+
+    localStorage.setItem('activeFile', title);
   }
-  const wrapperArray = [];
-  wrapperArray[0] = title;
-  wrapperArray[1] = element.value;
-  wrapperArray[2] = JSON.stringify(indentLog);
-  localStorage.setItem(`saveFile:${title}`, JSON.stringify(wrapperArray));
-
-  const tab = document.createElement('li');
-  tab.textContent = title;
-  tab.value = title;
-  tab.addEventListener('click', updateTextArea);
-  document.getElementById('fileBar').appendChild(tab);
-
-  localStorage.setItem('activeFile', title);
 }
 
 /**
@@ -144,7 +147,7 @@ function saveAs() {
 function deleteSave() {
   const element = document.getElementById('mainTextArea');
   if (localStorage.getItem('activeFile') === 'Unnamed File') {
-    element.value = '';
+    element.value = '⦿';
     indentLog = [];
   } else {
     localStorage.removeItem(`saveFile:${localStorage.getItem('activeFile')}`);
@@ -295,6 +298,25 @@ function updateCurrentPosition() {
   }
 }
 
+function setCursor() {
+  const element = document.getElementById('mainTextArea');
+  const cursorPos = element.selectionStart;
+  element.setSelectionRange(cursorPos - 2, cursorPos - 2);
+}
+
+
+function addBulletPoint() {
+  const stringArray = convertToArray();
+  const lineNumber = getLineNumber();
+  const element = document.getElementById('mainTextArea');
+
+  element.value = '';
+  stringArray[lineNumber] = '⦿ ';
+  element.value = stringArray.join('\n');
+
+  setTimeout(setCursor, 1);
+}
+
 
 /**
  * Handles all keyboard inputs
@@ -311,6 +333,9 @@ function keydownHandler(e) {
     moveLineUp();
   } else if (e.ctrlKey && e.key === 'ArrowDown') {
     moveLineDown();
+  }
+  if (e.key === 'Enter') {
+    addBulletPoint();
   }
 
   saveFile();
