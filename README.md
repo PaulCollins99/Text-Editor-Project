@@ -24,6 +24,8 @@ Current Features
 - Download file as .txt
 - Import a .txt file
 
+- Service worker is part implemented. Adds to cache but unable to go further than that
+
 - Highlight and drag lines up (part of textarea by default)
 
 How saving works.

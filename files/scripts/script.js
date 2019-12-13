@@ -22,9 +22,10 @@ function initialLoad() {
         // eslint-disable-next-line prefer-destructuring
         element.value = array[1];
         indentLog = JSON.parse(array[2]);
+      } else {
+        localStorage.setItem('activeFile', 'Unnamed File');
+        element.value = '⦿';
       }
-      localStorage.setItem('activeFile', 'Unnamed File');
-      element.value = '⦿';
     } else {
       const array = JSON.parse(localStorage.getItem(`saveFile:${fileToLoad}`));
       // eslint-disable-next-line prefer-destructuring
