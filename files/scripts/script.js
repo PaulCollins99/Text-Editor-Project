@@ -8,7 +8,9 @@ let indentLog = [];
 // ################## File management functions #################
 
 /**
- * function that runs when the page is first loaded
+ * function that runs when the page is first loaded. This loads the document that was specified in
+ * the splash screen. If new document is specified it loads a clean page. This also allows the user
+ * to carry on from where they left of after a refresh or leaving the page
  */
 function initialLoad() {
   const fileToLoad = localStorage.getItem('activeFile');
@@ -33,7 +35,9 @@ function initialLoad() {
 }
 
 /**
- * Save function that runs every 100ms and when certain events are triggered such as exit
+ * saveFile function works in much the same way as saveAs however it uses the current activeFile as
+ *  the name. This function is run on every keypress which removes the need to have a manual save
+ *  button
  */
 
 function saveFile() {
@@ -52,7 +56,10 @@ function saveFile() {
 }
 
 /**
- * updates the text area with the content of the file you just clicked in the nav section
+ * updates the text area with the content of the file you just clicked in the nav section. This
+ *  adds a simple highlight to the clicked file. It changes the content of the textarea by removing
+ *  its value and then reconstructing the save file into an array and adding the content portion
+ *  into the textarea. It also loads the indentLog into the program and reconstructs it as an array
  */
 
 function updateTextArea(e) {
@@ -84,7 +91,7 @@ function updateTextArea(e) {
 
 /**
  * Loops through all the saveFiles in the local storage and cuts their names
- * out to create a nav list on the side of the page
+ * out to create a nav list on the side of the page. This is run on the start of the app
  */
 
 function populateSideBar() {
@@ -99,7 +106,10 @@ function populateSideBar() {
 }
 
 /**
- * Save as feature which also contains an if statement to stop overwriting
+ * Save as feature which also contains an if statement to stop overwriting. Cretes a "wrapper"
+ *  array that contains all the details needed to save. These details are Title, Content,
+ *  Indent Log. This array is stringified as local storage cannot hold arrays. Adds a new list
+ *  item to the the nav bar on the side of the screen
  */
 
 function saveAs() {
@@ -128,7 +138,8 @@ function saveAs() {
 }
 
 /**
- * Function to allow the user to delete the current active file
+ * Function to allow the user to delete the current active file If the active file is unnamed it
+ *  clears the textarea and logs
  */
 function deleteSave() {
   const element = document.getElementById('mainTextArea');
@@ -157,7 +168,9 @@ function convertToArray() {
 
 
 /**
- * gets current line number for cursor
+ * gets current line number for cursor by cutting out from the start of the text to the position of
+ *  the cursor and then turning that into an array. This gets the line number as the cursor is
+ *  always on the last position meaning its array.length
  */
 function getLineNumber() {
   return window.mainTextArea.value.substring(0, window.mainTextArea.selectionStart).split('\n').length;
@@ -165,7 +178,9 @@ function getLineNumber() {
 
 
 /**
- * Moves the line the cursor is on up.
+ * Moves the line the cursor is on up. This works in the same way as move line down
+ *  however it has a condition that stops the function from running when the line in question is
+ *  at the top of the area
  */
 
 function moveLineUp() {
@@ -175,8 +190,6 @@ function moveLineUp() {
   const cursorPos = element.selectionStart;
   const tempIndentLog = indentLog[lineNumber];
   const temp = stringArray[lineNumber - 1];
-
-  // if statement to stop lines from attemtping to go -
 
   if (lineNumber - 1 !== 0) {
     stringArray[lineNumber - 1] = stringArray[lineNumber - 2];
@@ -193,7 +206,8 @@ function moveLineUp() {
 }
 
 /**
- * Moves the line the cursor is on down.
+ * Moves the line the cursor is on down. This function works by converting the textArea into an
+ *  array and then swap the positions of the lines in question. It also swaps the indentLog over
  */
 function moveLineDown() {
   const element = document.getElementById('mainTextArea');
@@ -216,7 +230,8 @@ function moveLineDown() {
 }
 
 /**
- * Removes one tab indent on the current line
+ * Removes one tab indent on the current line. This works the same way as addIndent however it
+ *  checks to see if the first character of the array position is a tab
  */
 function outDent() {
   const element = document.getElementById('mainTextArea');
@@ -237,7 +252,9 @@ function outDent() {
 }
 
 /**
- * Adds one tab indent on the current line
+ * Adds one tab indent on the current line. This is capped at a level of 5. This works
+ * by splitting the text area down into an array and then getting the current line the cursor
+ *  is on. This van the be used to access the correct position in the array to then add tabs too
  */
 function addIndent() {
   const element = document.getElementById('mainTextArea');
@@ -262,7 +279,11 @@ function addIndent() {
 
 // ################## Misc functions ###################
 
-function displayCurrentLine() {
+/**
+ * Functions used to display to the user the line they are currently on and the indent level
+ */
+
+function updateCurrentPosition() {
   const element = document.getElementById('currentLine');
   element.textContent = `Current Line: ${getLineNumber()}`;
 
@@ -297,6 +318,7 @@ function keydownHandler(e) {
 
 /**
  * A function that allows the user to download their note as a text document.
+ * This keeps the formatting so you can re import it on another machine
  */
 function downloadToTxt() {
   const value = document.getElementById('mainTextArea').value.replace(/\n/g, '\r\n');
@@ -309,6 +331,11 @@ function downloadToTxt() {
   element.click();
   document.body.removeChild(element);
 }
+
+/**
+ * Functions used to import .txt files into the app. These keep any indent
+ * formatting they may have so this could also be used to share files if needed
+ */
 
 function importFile() {
   const element = document.getElementById('mainTextArea');
@@ -338,7 +365,8 @@ function disableTab() {
 
 /**
  * adds all event listeners, calls the function that disbales tab on the mainTextArea,
- * and add functionallity to allow the user to cancel an unload
+ * and runs the initail functions that are needed at the start of the app. It also sets
+ * up an interval which updates the current line number and tab indent
  */
 function boot() {
   window.importButton.addEventListener('click', importFile);
@@ -354,7 +382,7 @@ function boot() {
   populateSideBar();
   disableTab();
   initialLoad();
-  setInterval(displayCurrentLine, 100);
+  setInterval(updateCurrentPosition, 100);
 }
 
 // runs the boot function once the load event is complete
