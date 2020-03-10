@@ -106,6 +106,7 @@ function populateSideBar() {
   }
 }
 
+
 /**
  * Save as feature which also contains an if statement to stop overwriting. Cretes a "wrapper"
  *  array that contains all the details needed to save. These details are Title, Content,
