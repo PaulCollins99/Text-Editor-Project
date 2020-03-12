@@ -43,9 +43,3 @@ Problems that Occured / Known bugs
 - Attempted to add QUnit test however I was unable to get these to work effectively.
 - You can backspace to get rid of indentation and it wont change the indentation log.
 - If you for example add an indent when the textarea has a scollbar the scrollbar will be moved to the top even if you are indenting the bottom line.
-
-Delete before upload
-
-- add postgres database
-- add a service worker (use hsww in github folder)
-
